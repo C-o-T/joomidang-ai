@@ -5,33 +5,32 @@
 ## 마지막 업데이트
 
 ```
-역할       : chief → developer 위임 / overseer 감시
+역할       : chief → developer/stability 세션 위임
 작성 시각  : 2026-05-09
-작업 내용  : 셀러 대시보드 + 관리자 패널 구현
-완료       : [API] seller/register, seller/products, seller/products/[id]
-             [API] admin/sellers, admin/sellers/[id], admin/products
-             [페이지] seller/page, seller/register, seller/products, seller/products/new
-             [페이지] seller/products/[id]/edit
-             [페이지] admin/page, admin/sellers, admin/products
-             [컴포넌트] SellerActionButton, ProductStatusButton
-             TypeScript 에러 0 유지
-미완료/보류: - Supabase 연결 (.env.local 실제 값 입력 필요)
-             - npx prisma migrate dev --name init
-             - Stripe Payment Intent 연동 (결제 완성)
-             - 상품 이미지 업로드 (Supabase Storage, 현재는 URL 입력으로 대체)
-중요 결정  : 상품 삭제 시 CartItem 선삭제 (FK 제약)
-             셀러 정지 시 User.role → CONSUMER 강등
-             클라이언트 버튼은 router.refresh() 패턴 (Server Component 재실행)
-발견한 문제: overseer 경고 — STATE.md 갱신 지시 프롬프트 누락(MEDIUM) → 교정 완료
-주의사항   : 새 상품은 status=PENDING → 관리자 ACTIVE 승인 필요
-             이미지 업로드는 Supabase Storage 연결 후 별도 구현
+작업 내용  : Stripe Payment Intent 연동 + 전체 빌드 테스트
+완료       : - @stripe/react-stripe-js 설치
+             - app/api/stripe/payment-intent/route.ts 생성
+             - checkout/page.tsx 2단계 결제 UI로 재작성 (배송지 → Stripe Elements)
+             - npm run build 전체 빌드 통과 ✅ (32개 라우트 전부 정상)
+             - TypeScript 에러 0 ✅
+             - 페이지 13개 / API 12개 / proxy 1개 전부 구조 확인 ✅
+             - SELLER/ADMIN 보안 패턴 전수 확인 ✅
+미완료/보류: - .env.local 실제 값 입력 필요 (5개 모두 placeholder)
+             - Supabase 연결 후 prisma migrate dev
+             - Stripe 실제 결제 E2E 테스트 (키 설정 필요)
+             - 상품 이미지 업로드 (Supabase Storage)
+중요 결정  : KRW/JPY는 zero-decimal 통화 → Stripe amount 그대로 (× 100 없음)
+             confirmPayment 후 Stripe가 return_url로 직접 redirect
+             장바구니 clear()는 주문 생성 성공 직후 호출
+발견한 문제: 없음 — 빌드 에러 0, TypeScript 에러 0
+주의사항   : 런타임 동작은 Supabase + Stripe 실제 키 설정 후 가능
 ```
 
 ---
 
 ## 현재 진행 중인 작업
 
-없음 — 다음 지시 대기
+없음 — 환경변수 설정 대기 중
 
 ---
 
@@ -39,18 +38,22 @@
 
 | 우선순위 | 작업 |
 |----------|------|
-| 1 | Supabase .env.local 연결 + prisma migrate |
-| 2 | Stripe Payment Intent 연동 |
+| 1 | .env.local 실제 값 설정 + prisma migrate |
+| 2 | Stripe E2E 테스트 (stripe CLI webhook 포워딩) |
 | 3 | 상품 이미지 업로드 (Supabase Storage) |
 
 ---
 
-## 중요 결정 이력
+## 구현 완료 라우트 현황 (2026-05-09)
 
-| 날짜 | 결정 내용 | 이유 |
-|------|-----------|------|
-| 2026-05-09 | Prisma 7 adapter-pg 방식 채택 | 서버리스 커넥션 풀 최적화 |
-| 2026-05-09 | middleware.ts → proxy.ts | Next.js 16 breaking change |
-| 2026-05-09 | 단일 MainPage + 7 테마 config 패턴 | V1의 6배 코드 중복 제거 |
-| 2026-05-09 | Zustand persist hydration → mounted 패턴 | SSR/CSR 불일치 방지 |
-| 2026-05-09 | 셀러 정지 → User.role CONSUMER 강등 | 권한 누수 방지 |
+| 라우트 | 타입 | 상태 |
+|--------|------|------|
+| / | Dynamic (SSR) | ✅ |
+| /login, /register | Static | ✅ |
+| /products | Dynamic | ✅ |
+| /products/[id] | Dynamic | ✅ |
+| /cart, /checkout | Static | ✅ |
+| /orders | Dynamic | ✅ |
+| /seller/* (5개) | Dynamic/Static | ✅ |
+| /admin/* (3개) | Dynamic | ✅ |
+| /api/* (12개) | Dynamic | ✅ |
