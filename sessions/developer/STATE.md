@@ -1,28 +1,35 @@
 # developer 상태 파일
 
+> 이 팀원의 개인 기억. 작업 완료 시 갱신하며, 다음 호출 시 이전 맥락을 복원한다.
+
 ## 현재 상태
 
-대기 중 — 2026-05-08 작업 완료
+대기 중
 
 ## 완료한 작업 이력
 
 | 날짜 | 작업 | 핵심 결정 |
 |------|------|-----------|
-| 2026-05-08 | 최초 투입 + arXiv 수집기 구현 | requests 라이브러리 사용 (urllib TLS 재협상 타임아웃 우회), HTTPS 직접 연결 + verify=False |
+| 2026-05-08 | dataverse — arXiv 수집기 구현 | requests 라이브러리, verify=False (Windows TLS 이슈) |
+| 2026-05-09 | joomidang V2 — 미구현 페이지 + API 라우트 전체 구현 | Prisma $transaction + findUniqueOrThrow 재조회 패턴, Zustand mounted 패턴 |
 
-## 현재 적용 중인 판단 기준
+## 현재 적용 중인 판단 기준 (joomidang V2)
 
-- dataverse mini-pipeline: Python 3.11, 이미 requirements.txt에 있는 라이브러리 우선 사용
-- HTTP 헤더: ASCII 전용 (한글 금지 — 이전 버그 재발 방지)
-- 반환 형식: wikipedia.py fetch_page()와 동일 키 구조 유지 (domain 키 추가는 호환 유지)
-- arXiv API: verify=False 필수 (Windows Python + arXiv Schannel TLS 재협상 이슈)
+- Next.js 16: `await params`, `await headers()`, `await searchParams` 필수
+- Prisma Decimal → `Number()` 변환 필수
+- `$transaction` 내 include 타입 추론 깨짐 → transaction 후 `findUniqueOrThrow` 재조회
+- Zustand persist hydration → `mounted` state + `useEffect` 패턴
+- 카테고리 enum: schema에서 `OTHER` (ETC 아님)
+- API 응답: `ok()` / `fail()` 헬퍼 일관 사용
+- TypeScript `any` 금지 — `as unknown as T` 패턴으로 대체
 
 ## chief와 협의한 사항
 
-없음 (최초 세션)
+- joomidang V2 스택: Next.js 16 + Prisma 7 + Supabase + NextAuth v5 + Stripe
+- Stripe API version: 2026-04-22.dahlia
 
 ## 다음 작업 예상
 
-- search_ui.py 개선 사항 적용 (chief 동의 후)
-- 세 번째 데이터 소스 수집기 추가 가능성
-- run_pipeline.py에 arXiv 수집 통합
+- 셀러 대시보드 (상품 등록 + 관리)
+- 관리자 페이지 (셀러 승인 + 전체 상품 관리)
+- Stripe Payment Intent 연동 (결제 완성)
