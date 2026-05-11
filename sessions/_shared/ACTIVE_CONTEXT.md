@@ -13,13 +13,13 @@
 ```
 역할       : chief
 작성 시각  : 2026-05-11
-작업 내용  : 원칙 파일 토큰 최적화
+작업 내용  : 원칙 파일 토큰 최적화 + 전체 종합 감사
 완료       : - PRINCIPLES.md 보강 (87→163줄): IPE 전체 형식·H1~H6·종료기록·STATE템플릿·감시세션예외 추가
              - AGENT_PRINCIPLES.md 감시세션 역할정의 3개 섹션 제거 (845→733줄, 중복 제거)
              - 전 세션 CLAUDE.md 12개: AGENT_PRINCIPLES.md 읽기 → PRINCIPLES.md 읽기로 교체
-             - START_HERE.md + workspace CLAUDE.md 읽기 순서 업데이트
-             - PRINCIPLES 레포 push: a0b4ba8, db84f03, 551704c
-             - joomidang-ai 레포 push: 7d1115c, f355ee2
+             - START_HERE.md + CLAUDE.md + README.md 읽기 순서 및 경로 업데이트
+             - 종합 감사: 구 경로 10건·읽기 지시 오류·누락 항목 수정 (2578763)
+             - README.md 구 경로 수정 (e9897b5)
 세션당 절감: 원칙 파일 845줄 → 163줄 (-682줄, 약 -61%)
 미완료/보류: 없음
 중요 결정  : IPE = 인라인 체크(판단1) + 역할 시나리오(판단3) + 조건부 승인게이트(판단2) 통합
