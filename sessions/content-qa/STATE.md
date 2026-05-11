@@ -3,7 +3,7 @@
 > 이 팀원의 개인 기억. 작업 완료 시 갱신하며, 다음 호출 시 이전 맥락을 복원한다.
 
 ## 현재 상태
-대기 중 — 2026-05-11 sessions/chief/CLAUDE.md 결함 4건 직접 수정 완료 (git push 29942c0)
+대기 중 — 2026-05-11 IPE 구현 검증 완료 (13개 파일 전체 통과)
 
 ## 완료한 작업 이력
 | 날짜 | 작업 | 핵심 결정 |
@@ -15,6 +15,7 @@
 | 2026-05-11 | v2 잔여 버그 2건 수정 + planner 권고 적용 — chief/CLAUDE.md 경로 수정 2곳, AGENT_PRINCIPLES.md 체크리스트 추가 | 버그1: 시작 확인 3~5번 경로 project-state 기준 교체. 버그2: 서브에이전트 prompt 완료처리 경로 동일 교체. 권고: 감시 세션 Agent 실행 체크 항목 추가. git push ea3017c. |
 | 2026-05-11 | sessions/chief/CLAUDE.md 품질 검토 (6차) — APPROVED_WITH_NOTES | 결함 4건 발견: (1) 복수 경고 충돌 처리 누락, (2) git 추적 레포 분기 기준 없음, (3) 불확실성 등급 언급 없음, (4) 감시 세션 시작 타이밍 불명확. 수정 권고 chief에 전달. |
 | 2026-05-11 | sessions/chief/CLAUDE.md 결함 4건 직접 수정 — git push 29942c0 | 결함 1: 복수 경고 충돌 처리 행 추가. 결함 2: git 레포 분기 기준 (PRINCIPLES/프로젝트 레포) 추가. 결함 3: 불확실성 등급 판단 6번 단계 추가. 결함 4: 감시 세션 생성 타이밍 "5개 파일 로드 완료 직후, 첫 지시 처리 전"으로 명시. |
+| 2026-05-11 | IPE 시스템 구현 검증 (13개 파일) — APPROVED | 검증 항목 5개 전체 통과. AGENT_PRINCIPLES.md I.1~I.4 존재, 전 CLAUDE.md IPE 블록+시나리오 테이블 삽입, 시나리오 역할 적합성 확인, PRINCIPLES.md IPE 요약 추가, 형식 통일. 범위 외 결함 발견: 9개 서브/감시 세션 CLAUDE.md 시작 절차 경로 미수정(project-state 미반영) — chief에 제안 보고. |
 
 ## 현재 적용 중인 판단 기준
 - 파일 간 내용 불일치는 "처음 읽는 세션이 혼란 없이 따라갈 수 있는가"를 기준으로 판단
@@ -40,5 +41,5 @@
 (없음 — 최초 QA 세션 / 수정 지시는 chief 위임 작업으로 수행)
 
 ## 다음 작업 예상
-- 각 role CLAUDE.md 파일(planner, developer, rca, okr, data, perf, overseer, stability, sentinel)에도 레포 이원화 구조(project-state 경로)가 반영되어 있는지 교차 QA 필요 (별도 지시 대기).
-- chief/CLAUDE.md 결함 4건 수정 완료 — 추가 재검토 불필요
+- planner/developer/rca/okr/data/perf/overseer/stability/sentinel 9개 CLAUDE.md 시작 절차 경로 v2 반영 (project-state 기준) — chief 승인 후 수정 가능
+- IPE 시스템은 검증 완료 — 추가 재검토 불필요
