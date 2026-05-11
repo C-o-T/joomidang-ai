@@ -15,6 +15,7 @@
 | 2026-05-08 | 원칙 A 도입 + content-qa/overseer 서브 세션 첫 실제 호출 | 처음으로 Principle A 준수하여 서브 세션에 실제 위임 |
 | 2026-05-08 | 미처리 결함 5건 수정 (content-qa 위임) | 원칙 A 번호 통합(7가지), 5단계 시작 절차 통일, overseer 제안 우선순위 반영 |
 | 2026-05-09 | PRINCIPLES 레포 재구성 — 오염 제거 + 레포 분리 | PRINCIPLES(설정 전용) / joomidang-ai / dataverse-ai 3개 레포로 분리. project-state/ 구조 도입. |
+| 2026-05-11 | 원칙 시스템 v2 — HANDOFF.md 4개 항목 완료 | 2-레포 구조 전면 반영, 감시 세션 체크리스트 추가, TEAM_STATUS.md 생성. overseer/stability/sentinel 실제 Agent 실행. |
 
 ## 현재 적용 중인 판단 기준
 

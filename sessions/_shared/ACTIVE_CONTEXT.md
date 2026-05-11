@@ -13,33 +13,36 @@
 ```
 역할       : chief
 작성 시각  : 2026-05-11
-작업 내용  : PRINCIPLES 레포 재구성 (오염 제거) + 원칙 v2 준비 논의
-완료       : - C-o-T/PRINCIPLES 레포 force push로 정리 (원칙·설정 파일만 남김)
-             - C-o-T/joomidang-ai 레포 생성 (세션 상태 파일 분리 보관)
-             - C-o-T/dataverse-ai 레포 생성 (dataverse 컨텍스트 분리)
-             - START_HERE.md + CLAUDE.md 새 레포 구조 반영
-             - .gitignore 보강 (project-state/, STATE.md 등 차단)
-미완료/보류: - 원칙 v2: AGENT_PRINCIPLES.md 6.2 + git 추적 섹션 새 구조 반영
-             - 원칙 v2: PRINCIPLES.md 자가 진단 표에 원칙 A 신호 행 추가
-완료 후 누락: STATE.md/ACTIVE_CONTEXT 업데이트를 세션 종료 시 하지 않음 → 원칙 6 위반
-중요 결정  : PRINCIPLES 레포는 pull 전용, 모든 프로젝트 상태는 {프로젝트}-ai 레포에 분리
-주의사항   : 다음 세션은 원칙 v2 작업 전 이 내용 숙지 후 시작
+작업 내용  : 원칙 시스템 v2 — 레포 분리 구조 전면 반영 + 감시 세션 활성화 검증 개선
+완료       : - AGENT_PRINCIPLES.md: 6.2 경로·6.4 파일 위치 표·git 추적 규칙 → 2-레포 구조 반영
+             - sessions/chief/CLAUDE.md: 시작 체크리스트·서브 세션 프롬프트·갱신 경로 전부 수정
+             - sessions/_shared/PRINCIPLES.md: 원칙 A 자가 진단 행·5단계 경로 업데이트
+             - AGENT_PRINCIPLES.md: chief 전용 감시 세션 실행 확인 체크리스트 항목 추가
+             - TEAM_STATUS.md: 11개 세션 현황판 신규 생성 (project-state/joomidang-ai/)
+             - PRINCIPLES 레포 push: eb30040, ea3017c
+             - joomidang-ai 레포 push: 9e0b11b, 769e815, 6df71a9, d6dbbc1
+미완료/보류: - 다른 역할 CLAUDE.md 파일(planner/developer/rca/okr/data/perf/overseer/stability/sentinel)
+               시작 절차 경로가 여전히 단일 레포 기준일 가능성 — 다음 세션에서 확인 후 수정
+완료 후 누락: 이전 세션의 원칙 6 위반은 이번 세션에서 해소
+중요 결정  : 감시 세션 활성화 검증 → STATE.md 기록 + 체크리스트 강화 방향 확정
+             (hooks 방식은 현 기술 스택에서 안정적 구현 불가 — planner 분석 결과)
+주의사항   : 다른 역할 CLAUDE.md 경로 점검 필요 — 범위 확장이므로 사용자 동의 후 진행
 ```
 
 ---
 
 ## 현재 진행 중인 작업
 
-없음 — 원칙 v2 준비 대기 중
+없음
 
 ---
 
 ## 미완료 / 보류
 
-- **원칙 v2** (다음 세션에서 처리):
-  - `AGENT_PRINCIPLES.md` 6.2 시작 체크리스트 → STATE.md가 프로젝트 레포에 있다는 내용 반영
-  - `AGENT_PRINCIPLES.md` git 추적 규칙 → `project-state/` 구조 반영
-  - `sessions/_shared/PRINCIPLES.md` 자가 진단 표 → 원칙 A 신호 행 추가
+- **[선택] 다른 역할 CLAUDE.md 경로 일괄 업데이트** (범위 외 — 사용자 동의 필요):
+  - planner/developer/rca/okr/data/perf/overseer/stability/sentinel CLAUDE.md 파일에
+    시작 절차 경로(STATE.md, PROJECT_CONTEXT.md, ACTIVE_CONTEXT.md)가 구 경로로 남아있을 가능성 존재
+  - content-qa가 발견, chief가 범위 외로 보류
 
 ---
 
