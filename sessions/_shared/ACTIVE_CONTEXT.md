@@ -13,12 +13,14 @@
 ```
 역할       : chief
 작성 시각  : 2026-05-11
-작업 내용  : IPE 시스템 설계·구현 + chief/CLAUDE.md 결함 4건 수정
-완료       : - IPE(Inline Principle Enforcement) 원칙 I 추가 (AGENT_PRINCIPLES.md)
-             - 전 세션 CLAUDE.md 12개 + PRINCIPLES.md IPE 블록 + 역할별 위반 시나리오 TOP3 삽입
-             - chief/CLAUDE.md 설계 결함 4건 수정 (복수경고·git분기·불확실성·감시세션타이밍)
-             - PRINCIPLES 레포 push: 29942c0, 77f5e88
-             - joomidang-ai 레포 push: e66cb67, 0302ae8, a540a7f
+작업 내용  : 원칙 파일 토큰 최적화
+완료       : - PRINCIPLES.md 보강 (87→163줄): IPE 전체 형식·H1~H6·종료기록·STATE템플릿·감시세션예외 추가
+             - AGENT_PRINCIPLES.md 감시세션 역할정의 3개 섹션 제거 (845→733줄, 중복 제거)
+             - 전 세션 CLAUDE.md 12개: AGENT_PRINCIPLES.md 읽기 → PRINCIPLES.md 읽기로 교체
+             - START_HERE.md + workspace CLAUDE.md 읽기 순서 업데이트
+             - PRINCIPLES 레포 push: a0b4ba8, db84f03, 551704c
+             - joomidang-ai 레포 push: 7d1115c, f355ee2
+세션당 절감: 원칙 파일 845줄 → 163줄 (-682줄, 약 -61%)
 미완료/보류: 없음
 중요 결정  : IPE = 인라인 체크(판단1) + 역할 시나리오(판단3) + 조건부 승인게이트(판단2) 통합
              HIGH 기준 H1~H6, 면제 기준 명시
