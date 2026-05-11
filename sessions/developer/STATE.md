@@ -4,7 +4,7 @@
 
 ## 현재 상태
 
-대기 중 — 2026-05-11 IPE 시스템 구현 완료, chief에 반환
+대기 중 — 2026-05-11 서브·감시 세션 CLAUDE.md 9개 시작 경로 수정 완료, chief에 반환
 
 ## 완료한 작업 이력
 
@@ -17,6 +17,7 @@
 | 2026-05-09 | joomidang V2 pre-test detail fixes 9건 (TypeScript 에러 0개) | Fix 1~9: Navbar·CartDrawer·Prisma·에러바운더리·로딩·sub-navs·AgeGate·CATEGORY_LABELS·NEXT_PUBLIC_BASE_URL |
 | 2026-05-11 | TEAM_STATUS.md 최초 생성 — 11개 세션 현황판 | 11개 STATE.md 전체 읽기 후 요약 작성, git 커밋·push 완료 |
 | 2026-05-11 | IPE 시스템 구현 — AGENT_PRINCIPLES.md 원칙 I 추가 + 12개 CLAUDE.md IPE 블록 삽입 + PRINCIPLES.md IPE 요약 추가 | 13개 파일 수정, PRINCIPLES 레포 push 완료 (77f5e88) |
+| 2026-05-11 | 서브·감시 세션 CLAUDE.md 9개 시작 경로 수정 — project-state/{프로젝트명}-ai 구조 반영 | rca/okr/data/content-qa/perf/overseer/stability/sentinel + developer 총 9개 파일, PRINCIPLES 레포 push 완료 (6ccf244) |
 
 ## 현재 적용 중인 판단 기준
 
@@ -30,4 +31,4 @@
 
 ## 다음 작업 예상
 
-없음 — chief 지시 대기 (IPE 시스템 구현 완료, 후속 지시 없음)
+없음 — chief 지시 대기 (서브·감시 세션 경로 수정 완료, 후속 지시 없음)
