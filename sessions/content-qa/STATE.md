@@ -3,7 +3,7 @@
 > 이 팀원의 개인 기억. 작업 완료 시 갱신하며, 다음 호출 시 이전 맥락을 복원한다.
 
 ## 현재 상태
-대기 중 — 2026-05-11 토큰 최적화 작업 완료 (PRINCIPLES.md 보강, AGENT_PRINCIPLES.md 중복 제거)
+대기 중 — 2026-05-11 원칙 파일 종합 감사 완료 (git 2578763)
 
 ## 완료한 작업 이력
 | 날짜 | 작업 | 핵심 결정 |
@@ -17,6 +17,7 @@
 | 2026-05-11 | sessions/chief/CLAUDE.md 결함 4건 직접 수정 — git push 29942c0 | 결함 1: 복수 경고 충돌 처리 행 추가. 결함 2: git 레포 분기 기준 (PRINCIPLES/프로젝트 레포) 추가. 결함 3: 불확실성 등급 판단 6번 단계 추가. 결함 4: 감시 세션 생성 타이밍 "5개 파일 로드 완료 직후, 첫 지시 처리 전"으로 명시. |
 | 2026-05-11 | IPE 시스템 구현 검증 (13개 파일) — APPROVED | 검증 항목 5개 전체 통과. AGENT_PRINCIPLES.md I.1~I.4 존재, 전 CLAUDE.md IPE 블록+시나리오 테이블 삽입, 시나리오 역할 적합성 확인, PRINCIPLES.md IPE 요약 추가, 형식 통일. 범위 외 결함 발견: 9개 서브/감시 세션 CLAUDE.md 시작 절차 경로 미수정(project-state 미반영) — chief에 제안 보고. |
 | 2026-05-11 | 토큰 최적화 — PRINCIPLES.md 5항목 보강 + AGENT_PRINCIPLES.md 중복 감시세션 정의 3개 제거 | PRINCIPLES.md: HIGH 판정 기준, 감시세션 원칙2 예외, 세션종료기록 형식, STATE.md 표준 형식, IPE 전체 형식 추가(87→163줄). AGENT_PRINCIPLES.md: overseer/stability/sentinel 역할 정의 섹션 제거(845→733줄). git push a0b4ba8 완료. |
+| 2026-05-11 | 원칙 파일 종합 감사 (15개 파일 전체) — 수정 8건 완료 | A. AGENT_PRINCIPLES.md 읽기 지시 전면 제거 (6.2 표, 세션 시작 체크리스트, PRINCIPLES.md 5단계). B. 경로 일관성 수정: CLAUDE.md 루트 3~5번, START_HERE.md 3단계, AGENT_PRINCIPLES.md 6.3/6.4/6.5/6.6. C. overseer/CLAUDE.md 접근 범위 경로 수정. D. planner/CLAUDE.md 산출물 STATE.md 경로 수정. E. START_HERE.md 레포 역할 표에 sessions/_shared/PRINCIPLES.md 추가. git push 2578763 완료. |
 
 ## 현재 적용 중인 판단 기준
 - 파일 간 내용 불일치는 "처음 읽는 세션이 혼란 없이 따라갈 수 있는가"를 기준으로 판단
@@ -24,7 +25,8 @@
 - 역할 CLAUDE.md의 시작 절차는 AGENT_PRINCIPLES.md 6.2 표와 반드시 일치해야 함
 
 ## 미처리 수정 사항
-없음 — 모두 완료
+- README.md 구 경로 3곳 (세션 시작 읽기 목록, ACTIVE_CONTEXT 경로) — chief 확인 후 처리 권고
+  (README.md는 이번 감사 범위 밖 파일이었으나 구 경로 잔존 발견)
 
 ## 직접 수정 완료 항목
 | 번호 | 파일 | 수정 내용 |
@@ -42,6 +44,5 @@
 (없음 — 최초 QA 세션 / 수정 지시는 chief 위임 작업으로 수행)
 
 ## 다음 작업 예상
-- planner/developer/rca/okr/data/perf/overseer/stability/sentinel 9개 CLAUDE.md 시작 절차 경로 v2 반영 (project-state 기준) — chief 승인 후 수정 가능
-- IPE 시스템은 검증 완료 — 추가 재검토 불필요
-- 토큰 최적화 작업 완료 — 추가 작업 없음
+- README.md 구 경로 수정 — chief 승인 후 처리
+- 이번 감사에서 발견된 모든 항목 수정 완료. 추가 재검토 불필요.
