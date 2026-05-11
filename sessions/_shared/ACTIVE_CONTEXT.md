@@ -1,50 +1,45 @@
 # 현재 작업 컨텍스트
 
-> ⚠️ **dataverse 세션에 긴급 공지**
-> 이 파일은 원칙 시스템(PRINCIPLES) 전용입니다.
-> **dataverse 작업 상태는 아래 파일을 사용하세요:**
-> → `sessions/_shared/ACTIVE_CONTEXT_dataverse.md`
-> 이 파일에 더 이상 dataverse 내용을 작성하지 마세요.
-
 > 세션 간 작업 상태를 공유하는 파일이다.
 > 세션 종료 시 반드시 아래 형식으로 업데이트한다.
-> 처음 파일을 생성하는 세션: chief
 >
-> ⚠️ 이 파일은 원칙 시스템(PRINCIPLES) 전용이다.
-> 프로젝트 작업 상태는 ACTIVE_CONTEXT_{프로젝트명}.md 파일을 별도로 사용한다.
+> ⚠️ 이 파일은 joomidang-ai 레포 전용이다.
+> 프로젝트별 작업 상태는 각 프로젝트 레포(`C-o-T/{프로젝트}-ai`)에서 관리한다.
 
 ---
 
 ## 마지막 업데이트
 
 ```
-역할       : content-qa
-작성 시각  : 2026-05-08
-작업 내용  : 이전 QA에서 발견한 미처리 결함 4건 + overseer 제안 1건 수정 (총 5건)
-완료       : [1] CLAUDE.md + PRINCIPLES.md 원칙 표 6→7가지, 원칙 A 행 추가
-             [2] AGENT_PRINCIPLES.md 원칙 5 및 세션 구조 섹션 표기 통일
-             [3] PRINCIPLES.md 세션 시작 4단계→5단계, STATE.md 읽기 단계 추가
-             [4] PRINCIPLES.md 경고 처리 복수 경고 충돌 처리 한 줄 추가
-             [5] START_HERE.md CLAUDE.md vs START_HERE.md 파일 성격 차이 주의사항 추가
-             [6] AGENT_PRINCIPLES.md 5.2 원칙 A > 원칙 3 우선순위 추가
-             git 커밋: e5a62fb / push 완료
-미완료/보류: ACTIVE_CONTEXT.md 프로젝트별 분리 구조 구현 (이전 세션 이월)
-중요 결정  : 원칙 A는 원칙 1~6과 동등하게 모든 원칙 표에 포함되어야 함 — 통합 완료
-발견한 문제: 없음 (5건 모두 수정 완료)
-주의사항   : 원칙 문서 v1 완성 상태. PRINCIPLES.md 자가 진단 표에 원칙 A 신호 행 추가는 별도 지시 필요.
+역할       : chief
+작성 시각  : 2026-05-11
+작업 내용  : PRINCIPLES 레포 재구성 (오염 제거) + 원칙 v2 준비 논의
+완료       : - C-o-T/PRINCIPLES 레포 force push로 정리 (원칙·설정 파일만 남김)
+             - C-o-T/joomidang-ai 레포 생성 (세션 상태 파일 분리 보관)
+             - C-o-T/dataverse-ai 레포 생성 (dataverse 컨텍스트 분리)
+             - START_HERE.md + CLAUDE.md 새 레포 구조 반영
+             - .gitignore 보강 (project-state/, STATE.md 등 차단)
+미완료/보류: - 원칙 v2: AGENT_PRINCIPLES.md 6.2 + git 추적 섹션 새 구조 반영
+             - 원칙 v2: PRINCIPLES.md 자가 진단 표에 원칙 A 신호 행 추가
+완료 후 누락: STATE.md/ACTIVE_CONTEXT 업데이트를 세션 종료 시 하지 않음 → 원칙 6 위반
+중요 결정  : PRINCIPLES 레포는 pull 전용, 모든 프로젝트 상태는 {프로젝트}-ai 레포에 분리
+주의사항   : 다음 세션은 원칙 v2 작업 전 이 내용 숙지 후 시작
 ```
 
 ---
 
 ## 현재 진행 중인 작업
 
-없음 — 원칙 시스템 v1 완성
+없음 — 원칙 v2 준비 대기 중
 
 ---
 
 ## 미완료 / 보류
 
-- TEAM_STATUS.md 생성 (팀원 현황판) — 필요 시 chief 판단으로 진행
+- **원칙 v2** (다음 세션에서 처리):
+  - `AGENT_PRINCIPLES.md` 6.2 시작 체크리스트 → STATE.md가 프로젝트 레포에 있다는 내용 반영
+  - `AGENT_PRINCIPLES.md` git 추적 규칙 → `project-state/` 구조 반영
+  - `sessions/_shared/PRINCIPLES.md` 자가 진단 표 → 원칙 A 신호 행 추가
 
 ---
 
@@ -52,32 +47,6 @@
 
 | 날짜 | 결정 내용 | 이유 |
 |------|-----------|------|
-| 2026-05-08 | sessions/ 폴더 구조 및 각 역할 CLAUDE.md 작성 완료 | Phase 2 세션 파일 배포 |
 | 2026-05-08 | 팀원 영속성 모델 도입 — sessions/{role}/STATE.md | 서브 세션을 임시 용역이 아닌 포지션별 팀원으로 운영 |
 | 2026-05-08 | 감시 세션 경고 대상 chief 전용 확정 | 구단 수뇌부는 감독(chief)에게만 경고 |
-| 2026-05-08 | ACTIVE_CONTEXT 프로젝트별 분리 필요 확인 | 단일 파일 구조에서 프로젝트 혼재 오염 발생 |
-
----
-
-## 주의사항
-
-**⚠️ 이 파일은 원칙 시스템(PRINCIPLES) 전용입니다.**
-프로젝트 작업 기록은 반드시 `ACTIVE_CONTEXT_{프로젝트명}.md`에 작성하세요.
-
----
-
-## 업데이트 방법
-
-세션 종료 전 아래 형식으로 이 파일을 업데이트한다:
-
-```
-[세션 종료 기록]
-역할       : {내 세션 역할}
-작성 시각  : {날짜}
-작업 내용  : {무엇을 했는가}
-완료       : {마무리된 것}
-미완료/보류: {다음 세션이 이어받아야 할 것}
-중요 결정  : {이번 세션에서 내린 핵심 결정 + 이유}
-발견한 문제: {해결 안 된 이슈, 리스크}
-주의사항   : {다음 세션이 반드시 알아야 할 것}
-```
+| 2026-05-09 | 레포 3분리 구조 확정 | PRINCIPLES(설정) / {프로젝트}-ai(상태) — 오염 원천 차단 |
