@@ -19,8 +19,7 @@
              - chief/CLAUDE.md 설계 결함 4건 수정 (복수경고·git분기·불확실성·감시세션타이밍)
              - PRINCIPLES 레포 push: 29942c0, 77f5e88
              - joomidang-ai 레포 push: e66cb67, 0302ae8, a540a7f
-미완료/보류: - 서브/감시 세션 CLAUDE.md 9개의 시작 절차 경로(3~5번)가 구 단일레포 기준
-               → 실제 오작동 가능성 있음 (content-qa 재확인) — 사용자 동의 대기
+미완료/보류: 없음
 중요 결정  : IPE = 인라인 체크(판단1) + 역할 시나리오(판단3) + 조건부 승인게이트(판단2) 통합
              HIGH 기준 H1~H6, 면제 기준 명시
 주의사항   : 다음 세션 시작 시 감시 세션(overseer/stability/sentinel) Agent 실행 필수
@@ -36,11 +35,7 @@
 
 ## 미완료 / 보류
 
-- **[실제 오작동 위험] 서브/감시 세션 CLAUDE.md 9개 경로 미수정**:
-  - planner/developer/rca/okr/data/perf/overseer/stability/sentinel CLAUDE.md
-  - "시작 시 필수 확인" 3~5번 항목이 구 경로 (`sessions/...`) 그대로
-  - 세션이 파일을 찾지 못하는 실제 오작동 가능성 (content-qa 재확인)
-  - 사용자 동의 후 즉시 수정 가능
+없음 — 전 세션 CLAUDE.md 경로 수정 완료 (6ccf244)
 
 ---
 
