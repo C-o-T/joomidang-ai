@@ -12,19 +12,15 @@
 
 ```
 역할       : chief
-작성 시각  : 2026-05-11
-작업 내용  : 원칙 파일 토큰 최적화 + 전체 종합 감사
-완료       : - PRINCIPLES.md 보강 (87→163줄): IPE 전체 형식·H1~H6·종료기록·STATE템플릿·감시세션예외 추가
-             - AGENT_PRINCIPLES.md 감시세션 역할정의 3개 섹션 제거 (845→733줄, 중복 제거)
-             - 전 세션 CLAUDE.md 12개: AGENT_PRINCIPLES.md 읽기 → PRINCIPLES.md 읽기로 교체
-             - START_HERE.md + CLAUDE.md + README.md 읽기 순서 및 경로 업데이트
-             - 종합 감사: 구 경로 10건·읽기 지시 오류·누락 항목 수정 (2578763)
-             - README.md 구 경로 수정 (e9897b5)
-세션당 절감: 원칙 파일 845줄 → 163줄 (-682줄, 약 -61%)
-미완료/보류: 없음
-중요 결정  : IPE = 인라인 체크(판단1) + 역할 시나리오(판단3) + 조건부 승인게이트(판단2) 통합
-             HIGH 기준 H1~H6, 면제 기준 명시
-주의사항   : 다음 세션 시작 시 감시 세션(overseer/stability/sentinel) Agent 실행 필수
+작성 시각  : 2026-05-13
+작업 내용  : 원칙 시스템 정합성 감사 + sentinel 자동화 조사 + 수정 적용
+완료       : - AGENT_PRINCIPLES.md: 원칙 5·세션 구조 총칙에 원칙 I(IPE) 추가, 변경 이력 기재
+             - PRINCIPLES.md: 세션 시작 6단계 추가 (chief 감시 세션 활성화 강제)
+             - sessions/chief/CLAUDE.md: 감시 세션 미실행 시 원칙 A 위반 문구 강화
+             - CLAUDE.md (루트): push 금지 주석 "상태 파일" 한정으로 명확화 (e322f33)
+미완료/보류: sentinel 자동화 hooks 방안 — UserPromptSubmit hook 활용 여부 사용자 결정 대기
+중요 결정  : 단기 자동화 = 6단계 명시(완료) / 중기 = hooks 설정 (선택적)
+주의사항   : 없음
 ```
 
 ---
