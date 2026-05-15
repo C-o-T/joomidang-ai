@@ -25,7 +25,7 @@
 
 ---
 
-## ⚠️ 긴급 공지 — 2026-05-13 원칙 시스템 업데이트
+## ⚠️ 긴급 공지 — 2026-05-14~15 원칙 시스템 v3 완성
 
 **다음 세션 시작 전 반드시 확인**
 
@@ -68,6 +68,26 @@ Claude Code UserPromptSubmit hook이 이제 자동 실행된다.
 
 ---
 
+## 마지막 업데이트
+
+```
+역할       : chief
+작성 시각  : 2026-05-15
+작업 내용  : 원칙 시스템 v3 완성 — hook 자동화 + 감시 독립성 + 연대책임
+완료       : - PostToolUse hook: 도구 호출 로그 자동 기록 (.tool_log.jsonl)
+             - 감시 세션 독립성: 로그 직접 읽기 + 기계적 경고 트리거
+             - 연대책임 시스템: VIOLATION_LOG.md + 팀 해산 프로토콜 (Team 1 초기화)
+             - stability 권고 반영: tool-logger 절대경로, Bash 로그 제거 (48f37ee)
+             - .sentinel_active 프로젝트 루트로 경로 이동 + 2026-05-14 갱신
+             - overseer 원칙 A 경고 반박: 이번 세션 위임 실제 이행됨
+               (planner/rca/developer/content-qa Agent 실행 + .delegation_active 절차 준수)
+미완료/보류: 없음
+중요 결정  : 서브 세션 STATE.md 미업데이트 = 서브 세션 원칙 6 위반 (chief 직접 처리 증거 아님)
+주의사항   : 다음 세션 시작 시 VIOLATION_LOG.md 읽기 (7단계) 필수 — Team 1, 위반 0회
+```
+
+---
+
 ## 현재 진행 중인 작업
 
 없음
@@ -76,7 +96,7 @@ Claude Code UserPromptSubmit hook이 이제 자동 실행된다.
 
 ## 미완료 / 보류
 
-없음
+- `.claude/.sentinel_active` 수동 생성 대기 (사용자 액션 필요)
 
 ---
 

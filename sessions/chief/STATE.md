@@ -16,6 +16,7 @@
 | 2026-05-08 | 미처리 결함 5건 수정 (content-qa 위임) | 원칙 A 번호 통합(7가지), 5단계 시작 절차 통일, overseer 제안 우선순위 반영 |
 | 2026-05-09 | PRINCIPLES 레포 재구성 — 오염 제거 + 레포 분리 | PRINCIPLES(설정 전용) / joomidang-ai / dataverse-ai 3개 레포로 분리. project-state/ 구조 도입. |
 | 2026-05-11 | 원칙 시스템 v2 — HANDOFF.md 4개 항목 완료 | 2-레포 구조 전면 반영, 감시 세션 체크리스트 추가, TEAM_STATUS.md 생성. overseer/stability/sentinel 실제 Agent 실행. |
+| 2026-05-13~15 | 원칙 시스템 v3 — hook 자동화 + 연대책임 | sentinel hook(UserPromptSubmit/PreToolUse/PostToolUse), 도구 로그, 감시 세션 독립성 강화, VIOLATION_LOG + 팀 해산 프로토콜 |
 
 ## 현재 적용 중인 판단 기준
 
