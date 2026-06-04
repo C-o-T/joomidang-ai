@@ -10,28 +10,18 @@
 
 | 날짜 | 작업 | 핵심 결정 |
 |------|------|-----------|
-| 2026-05-08 | AGENT_PRINCIPLES.md 고도화 + 세션 파일 전체 설계 | 6가지 원칙 수립, sentinel 추가, 팀원 영속성 모델 도입 |
-| 2026-05-08 | 원칙 최적화 — 5가지 허점 수정 | STATE.md 표준화, chief/감시 세션 STATE.md 추가, 체크리스트 분리, 경계 정의 |
-| 2026-05-08 | 원칙 A 도입 + content-qa/overseer 서브 세션 첫 실제 호출 | 처음으로 Principle A 준수하여 서브 세션에 실제 위임 |
-| 2026-05-08 | 미처리 결함 5건 수정 (content-qa 위임) | 원칙 A 번호 통합(7가지), 5단계 시작 절차 통일, overseer 제안 우선순위 반영 |
-| 2026-05-09 | PRINCIPLES 레포 재구성 — 오염 제거 + 레포 분리 | PRINCIPLES(설정 전용) / joomidang-ai / dataverse-ai 3개 레포로 분리. project-state/ 구조 도입. |
-| 2026-05-11 | 원칙 시스템 v2 — HANDOFF.md 4개 항목 완료 | 2-레포 구조 전면 반영, 감시 세션 체크리스트 추가, TEAM_STATUS.md 생성. overseer/stability/sentinel 실제 Agent 실행. |
-| 2026-05-13~15 | 원칙 시스템 v3 — hook 자동화 + 연대책임 | sentinel hook(UserPromptSubmit/PreToolUse/PostToolUse), 도구 로그, 감시 세션 독립성 강화, VIOLATION_LOG + 팀 해산 프로토콜 |
 
 ## 현재 적용 중인 판단 기준
 
-- 원칙 시스템 자체가 이 워크스페이스의 기반 인프라 — 다른 모든 작업보다 먼저 안정화
-- 서브 세션 호출 전 반드시 독립적 작업인지 확인 후 병렬 처리
+- 서브 세션 호출 전 독립 작업 여부 확인 후 병렬 처리
 - 감시 세션 경고는 무시 없이 반드시 응답
+- 원칙 파일 수정은 content-qa/developer에 위임 (직접 수정 금지)
 
 ## 사용자와 협의한 사항
 
-- 서브 세션 = 팀원 (영속), 감시 세션은 chief에게만 경고
-- CLAUDE.md에 원칙 직접 삽입 (긴 세션에서 망각 방지)
-- PRINCIPLES 레포 = 원칙·설정 전용 (pull만), 프로젝트 상태는 프로젝트 레포에 분리
-- 레포 구조: C-o-T/PRINCIPLES (설정) / C-o-T/{프로젝트}-ai (상태)
+- 레포 구조: C-o-T/PRINCIPLES (설정 전용) / C-o-T/{프로젝트}-ai (상태 전용)
+- 서브 세션 = 팀원 (영속), STATE.md 기반 맥락 유지
 
 ## 다음 작업 예상
 
-- 원칙 v2 준비: AGENT_PRINCIPLES.md 6.2 + git 추적 섹션 → 새 레포 구조 반영
-- PRINCIPLES.md 자가 진단 표에 원칙 A 신호 행 추가 (보류 중)
+없음
