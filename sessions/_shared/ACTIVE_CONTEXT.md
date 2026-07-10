@@ -88,15 +88,43 @@ Claude Code UserPromptSubmit hook이 이제 자동 실행된다.
 
 ---
 
+## 마지막 업데이트
+
+```
+역할       : chief
+작성 시각  : 2026-06-24
+작업 내용  : 주미당 V2 플랫폼 기능 완성 + 배포 준비
+완료       : - git commit: 전체 코드 7커밋 (127파일 포함)
+             - ImageGallery 컴포넌트: 이전/다음/썸네일 목록
+             - 셀러 상품 폼 (신규+편집): 다중 이미지 업로드 3장
+             - API seller/products POST+PUT: images 배열 지원
+             - SEO: generateMetadata (상품 상세), sitemap.ts, robots.ts
+             - 상품 상세 페이지: 관련 상품 4개 섹션
+             - 검색 버그 수정: mode:insensitive → contains (SQLite 호환)
+             - vercel.json: icn1 리전, prisma generate 빌드
+             - lib/prisma.ts: DATABASE_URL 기반 어댑터 자동 선택 (libsql/pg)
+             - prisma/seed.ts: 동일 자동 어댑터 선택
+             - .sentinel_active: 프로젝트 루트에 생성
+미완료/보류: - Supabase PostgreSQL 연결 (DATABASE_URL 필요)
+             - schema.prisma provider "sqlite" → "postgresql" 전환 (Supabase 연결 후)
+             - Vercel 배포 (위 완료 후)
+중요 결정  : schema 전환은 Supabase 자격증명 없이 local dev를 깨뜨리므로 사용자 확인 후 진행
+주의사항   : schema 전환 시 npx prisma migrate reset + migrate dev --name init + db seed 필요
+```
+
+---
+
 ## 현재 진행 중인 작업
 
-없음
+없음 — 버그 수정 완료, 배포 대기 중
 
 ---
 
 ## 미완료 / 보류
 
-- `.claude/.sentinel_active` 수동 생성 대기 (사용자 액션 필요)
+- Supabase / AWS 프로젝트 생성 + DATABASE_URL 설정 (사용자 액션 필요)
+- schema.prisma provider를 "postgresql"로 전환 (DB URL 설정 후)
+- Vercel 또는 AWS 배포 (위 완료 후)
 
 ---
 

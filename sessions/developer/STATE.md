@@ -4,7 +4,7 @@
 
 ## 현재 상태
 
-대기 중 — 2026-05-11 CLAUDE.md 12개 토큰 최적화 완료, chief에 반환
+대기 중 — 2026-07-10 hook 버그 2건 수정 + 중복 파일 정리 + joomidang-ai 커밋/푸시 완료, chief에 반환
 
 ## 완료한 작업 이력
 
@@ -19,17 +19,23 @@
 | 2026-05-11 | IPE 시스템 구현 — AGENT_PRINCIPLES.md 원칙 I 추가 + 12개 CLAUDE.md IPE 블록 삽입 + PRINCIPLES.md IPE 요약 추가 | 13개 파일 수정, PRINCIPLES 레포 push 완료 (77f5e88) |
 | 2026-05-11 | 서브·감시 세션 CLAUDE.md 9개 시작 경로 수정 — project-state/{프로젝트명}-ai 구조 반영 | rca/okr/data/content-qa/perf/overseer/stability/sentinel + developer 총 9개 파일, PRINCIPLES 레포 push 완료 (6ccf244) |
 | 2026-05-11 | 토큰 최적화 — CLAUDE.md 12개 읽기 순서 1번 PRINCIPLES.md 교체, IPE 참조 교체 | 11개 파일 수정 (chief 템플릿 포함 총 12개 참조 포인트), 중복 시작절차 없음 확인, PRINCIPLES 레포 push 완료 (db84f03) |
+| 2026-07-10 | tool-logger.ps1 하드코딩 경로 수정 (PRINCIPLES 레포) | `C:\Users\wptmd\Desktop\joomidang\...` → 저장소 루트 기준 상대경로 `.tool_log_debug.txt`/`.tool_log.jsonl`, session-start.ps1·check-sentinel.ps1과 방식 통일 |
+| 2026-07-10 | tool-logger.ps1 인코딩 버그 수정 (joomidang-v2 레포, 별도 git) | `[Console]::InputEncoding = UTF8` 명시 설정으로 한글 경로 mojibake 방지, regex fallback 경로에 `ConvertTo-JsonSafeString` 헬퍼 추가해 JSON 이스케이프 처리 — 단 이 레포는 지시 범위상 커밋 안 함(별도 git, 사용자 확인 필요) |
+| 2026-07-10 | ACTIVE_CONTEXT_joomidang.md 삭제 (joomidang-ai) | 삭제 전 ACTIVE_CONTEXT.md와 비교 — 고유 정보는 모두 최신 파일에 이미 반영되었거나(구현완료 항목) joomidang-v2 후속 커밋(5923379)으로 superseded된 구식 Stripe 결정(zero-decimal 통화·clear() 타이밍)이라 병합 대상 없음으로 판단, 병합 없이 삭제 |
+| 2026-07-10 | joomidang-ai 레포 미푸시 변경사항 커밋+푸시 | VIOLATION_LOG.md #1(감시세션 3개가 이미 발동한 경고, chief 응답 대기 상태) + ACTIVE_CONTEXT.md 06-24 기록 + overseer/sentinel/stability STATE.md + ACTIVE_CONTEXT_joomidang.md 삭제를 함께 커밋·push |
 
 ## 현재 적용 중인 판단 기준
 
 - Next.js 16 + Prisma 7 핵심 변경사항 숙지 필수 (proxy.ts, async headers, prisma.config.ts 등)
 - TypeScript 에러 0개 유지 — 커밋 전 반드시 검증
 - chief의 명시적 지시 범위 내 작업만 수행 (원칙 2.1)
+- hook 파일 경로는 저장소 루트 기준 상대경로로 통일 (session-start.ps1/check-sentinel.ps1 패턴 참고, PSScriptRoot 미사용)
 
 ## chief와 협의한 사항
 
 - 2026-05-11: chief 지시로 TEAM_STATUS.md 생성 작업 수행 (문서 작업이나 chief 명시 지시)
+- 2026-07-10: chief 지시로 hook 버그 수정 2건 + 중복파일 정리 + 커밋/푸시 수행. 단, overseer/sentinel/stability가 이미 동일 사안으로 VIOLATION_LOG.md #1(chief 위반 1/3)을 발동해 "chief 응답 대기" 상태임을 확인 — developer 권한 밖이므로 판단 없이 chief에게 그대로 전달함
 
 ## 다음 작업 예상
 
-없음 — chief 지시 대기 (토큰 최적화 완료, 후속 지시 없음)
+없음 — chief 지시 대기. 단, chief는 VIOLATION_LOG.md #1(원칙 6+4 위반 경고)에 대해 수용/반박 응답을 사용자에게 직접 보고해야 함 (감시 세션 규칙상 developer가 대신 판단 불가)
