@@ -114,9 +114,42 @@ Claude Code UserPromptSubmit hook이 이제 자동 실행된다.
 
 ---
 
+## 마지막 업데이트
+
+```
+역할       : chief
+작성 시각  : 2026-07-10
+작업 내용  : 세션 시작 절차 정식 수행 (7단계) + 감시 세션 최초 실가동 + 위반 사이클 1회 처리
+완료       : - overseer/stability/sentinel Agent 3개 실제 실행, .sentinel_active 마커 생성
+             - stability: joomidang-v2 tool-logger.ps1 UTF-8 인코딩 버그 발견 → developer가 수정·커밋(ff72e87)
+             - sentinel: PRINCIPLES 레포 tool-logger.ps1 하드코딩 경로 결함 발견 → developer가 수정·커밋(0c5d5cf)
+             - sentinel/overseer: ACTIVE_CONTEXT_joomidang.md 비표준 중복 파일 발견 → 비교 후 삭제(고유 정보 없음 확인)
+             - overseer: 2026-06-04 감시 세션 STATE.md 초기화가 비표준 경로·정식 절차(3진아웃) 없이 이루어진 점을
+               원칙 6+4 위반으로 판정 → VIOLATION_LOG.md #1 기록 (chief 위반 0/3 → 1/3)
+             - 사용자에게 06-04 지시 여부 확인 → "제가 지시했습니다" 확답 받음
+             - sentinel 재검토: 지시의 정당성과 절차 위반(비표준 파일 기록·미승계·06-24 기록 5주간 미푸시)은
+               별개 사안으로 판단 → 위반 판정 유지(1/3), 근거를 VIOLATION_LOG.md에 주석으로 추가
+             - joomidang-ai 레포 미푸시 변경사항(06-24 기록 등) 커밋(6373079)+push 완료
+완료       : 세 레포(PRINCIPLES/joomidang-ai/joomidang-v2) 모두 커밋·push 최신 상태
+미완료/보류: - sentinel 제안 — "사용자 직접 지시에 의한 예외적 초기화" 절차가 VIOLATION_LOG.md에 정의되어
+               있지 않음. 향후 이런 경우 표준 파일 기재 + VIOLATION_LOG 동시 기록을 의무화하는 절차
+               신설 여부 사용자 결정 대기
+             - joomidang-v2 레포에 이번 작업과 무관한 미커밋 변경(상품 필터/정렬 기능 추정)이 존재 —
+               사용자가 "지금은 놓아두기"로 확인, 추후 확인 필요
+             - Supabase/AWS 프로젝트 생성 + DATABASE_URL 설정 (기존 미완료 항목, 변동 없음)
+중요 결정  : "지시의 정당성"과 "절차 준수 여부"는 별개로 판단한다 — 사용자 승인이 있어도 표준 경로·
+             정식 절차를 우회한 사실 자체는 위반으로 유지 (sentinel 판단, chief 수용)
+발견한 문제: PRINCIPLES 레포와 joomidang-v2 레포 각각의 tool-logger.ps1 훅이 서로 다른 이유로
+             장기간 작동 불능/손상 상태였음에도 감지되지 않고 있었음 (감시 인프라의 로그 기반 검증이
+             사실상 무력화된 상태로 5주 이상 방치)
+주의사항   : 다음 세션은 VIOLATION_LOG.md 1/3 상태로 시작 — 2회 도달 시 모든 결과물 overseer 검토 필수 전환됨
+```
+
+---
+
 ## 현재 진행 중인 작업
 
-없음 — 버그 수정 완료, 배포 대기 중
+없음 — 훅 인프라 복구 및 위반 사이클 1건 처리 완료, 배포 준비 단계 대기 중
 
 ---
 
@@ -125,6 +158,8 @@ Claude Code UserPromptSubmit hook이 이제 자동 실행된다.
 - Supabase / AWS 프로젝트 생성 + DATABASE_URL 설정 (사용자 액션 필요)
 - schema.prisma provider를 "postgresql"로 전환 (DB URL 설정 후)
 - Vercel 또는 AWS 배포 (위 완료 후)
+- "사용자 직접 지시에 의한 예외적 초기화" 절차 신설 여부 (sentinel 제안, 사용자 결정 대기)
+- joomidang-v2 레포의 무관한 미커밋 변경(상품 필터/정렬) 추후 확인
 
 ---
 
@@ -136,3 +171,4 @@ Claude Code UserPromptSubmit hook이 이제 자동 실행된다.
 | 2026-05-08 | 감시 세션 경고 대상 chief 전용 확정 | 구단 수뇌부는 감독(chief)에게만 경고 |
 | 2026-05-09 | 레포 3분리 구조 확정 | PRINCIPLES(설정) / {프로젝트}-ai(상태) — 오염 원천 차단 |
 | 2026-05-13 | sentinel hook 자동화 — UserPromptSubmit 블로킹 방식 | 구조적 모순(chief가 sentinel을 수동 실행) 해소 |
+| 2026-07-10 | 지시의 정당성 ≠ 절차 준수 — 사용자 승인 있어도 비표준 절차는 위반으로 유지 | 사후 승인이 절차 우회의 면죄부가 되면 원칙 6·투명성이 형해화됨 |
