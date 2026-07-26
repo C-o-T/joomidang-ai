@@ -3,11 +3,12 @@
 > 이 팀원의 개인 기억. 작업 완료 시 갱신하며, 다음 호출 시 이전 맥락을 복원한다.
 
 ## 현재 상태
-대기 중 — 2026-07-10 joomidang 특정 내용 제거 작업 완료 (git 5238cc6)
+대기 중 — 2026-07-26 START_HERE.md/.gitignore 프로젝트 오염 제거 작업 완료 (git d9e885d)
 
 ## 완료한 작업 이력
 | 날짜 | 작업 | 핵심 결정 |
 |------|------|-----------|
+| 2026-07-26 | PRINCIPLES 레포 2차 오염 제거 — START_HERE.md, .gitignore (chief 지시) | (1) START_HERE.md 디렉터리 예시 `dataverse-ai` 하드코딩 → `{프로젝트명}-ai` placeholder 교체. (2) "현재 운영 중인 프로젝트 레포" 표(dataverse 운영 정보) 전체 삭제, 표 삭제 후 코드블록→`---` 구분선으로 문맥 자연스럽게 정리(중간 제목·빈 줄 제거). (3) .gitignore에서 `news-tracker/`, `autotrader/`, `dataverse/`, `joomidang-platform/`, `joomidang-v2/`, `KDT/` 프로젝트 고유명사 라인 6개 삭제 — `project-state/` 범용 패턴이 이미 커버하므로 중복이자 오염. `AGENTS.md`, `*.sql`, `package.json`, `node_modules/` 등 범용 패턴은 유지. 전체 레포 grep으로 재확인 — 잔여 프로젝트 고유명사 없음. git push d9e885d 완료. |
 | 2026-05-08 | AGENT_PRINCIPLES.md / CLAUDE.md / chief/CLAUDE.md / START_HERE.md / PRINCIPLES.md 교차 QA | 조건부 승인 (HIGH 2건, MEDIUM 2건, LOW 2건 결함 보고). 결함 3, 4는 직접 수정 완료. |
 | 2026-05-08 | 미처리 결함 4건 + overseer 제안 1건 직접 수정 및 git 커밋 (e5a62fb) | 수정 항목 1~5 모두 완료. 원칙 A 번호 체계 통합, 5단계 절차, 복수 경고 병합, 파일 성격 차이, 우선순위 추가. |
 | 2026-05-08 | START_HERE.md 전면 재작성 + CLAUDE.md "세션 시작 시 반드시 읽을 파일" 섹션 교체 | PRINCIPLES/프로젝트 레포 이원화 구조 반영. STATE.md 등 상태 파일은 프로젝트 레포에만. PRINCIPLES 레포는 pull 전용. |
