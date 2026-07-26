@@ -32,5 +32,22 @@
 
 ## 다음 감시 예상
 
-- tool-logger.ps1 수정 여부 확인 (stdin을 UTF-8로 명시적으로 읽도록 수정되었는지)
-- 수정 후 `.tool_log.jsonl` 신규 항목이 정상 JSON(파싱 가능)으로 기록되는지 재검증
+- CRITICAL-2 (페이지네이션 필터 누락) 수정 여부 확인
+- CRITICAL-1 (검색 contains mode 미설정) — PostgreSQL 전환 시 재검증
+- WARN-1 쿼리 중복 해소 여부 확인
+
+---
+
+## 2026-07-10 기술 감사 — ef0ba34 커밋 파일 9개
+
+| 날짜 | 발생 위치 | 오류 유형 | 발생 횟수 | 처리 결과 |
+|------|-----------|-----------|-----------|-----------|
+| 2026-07-10 | products/page.tsx L182-214 | 신규 (CRITICAL) | 1 | 보고 완료 — 페이지네이션 URL에서 필터 파라미터 5개 누락 |
+| 2026-07-10 | route.ts + page.tsx 검색 쿼리 | 신규 (CRITICAL) | 1 | 보고 완료 — contains mode 미설정, PostgreSQL 전환 시 발현 |
+| 2026-07-10 | route.ts + page.tsx 전체 | 신규 (WARN) | 1 | 보고 완료 — 쿼리 로직/SortKey/getOrderBy 완전 중복 |
+| 2026-07-10 | route.ts L24 | 신규 (WARN) | 1 | 보고 완료 — category 파라미터 검증 없이 타입 단언만 사용 |
+| 2026-07-10 | FAQContent.tsx | 신규 (WARN) | 1 | 보고 완료 — ja/zh 로케일 FAQ 미구현 (영문 폴백) |
+| 2026-07-10 | Footer.tsx L45 | 신규 (WARN) | 1 | 보고 완료 — locale을 keyof로 강제 캐스팅, 타입 안전성 부재 |
+
+**반복 오류 모니터링 (3회 기준)**:
+- 현재 모든 항목 1회 발생 — 반복 오류 없음, chief 경고 발동 없음

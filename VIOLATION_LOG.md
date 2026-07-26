@@ -11,8 +11,8 @@
 |------|-----|
 | 팀 번호 | Team 1 |
 | 팀 시작일 | 2026-05-14 |
-| chief 위반 횟수 | 1 / 3 |
-| 상태 | 정상 운영 (경고 1건 — chief 응답 대기) |
+| chief 위반 횟수 | 2 / 3 ⚠️ (사용자 최종 확정 대기 — 감경 가능성 있음, 아래 #2 참고) |
+| 상태 | 경고 강화 — 2회 도달 시 기준: 이후 모든 결과물 overseer 검토 필수 (사용자 확정 후 발효) |
 
 **위반 횟수별 조치:**
 - 1회: 기록 + chief 경고
@@ -25,7 +25,19 @@
 
 | # | 날짜 | 위반 원칙 | 내용 | 발견 세션 |
 |---|------|-----------|------|----------|
+| 2 | 2026-07-10 | 원칙 A (위임 의무) | **감시 세션 미실행**: ACTIVE_CONTEXT.md 이력 및 세션 기록 검토 결과, 2026-07-10 이전의 복수 세션(적어도 2026-06-24 포함)에서 chief가 overseer/stability/sentinel Agent 3개를 실제 실행하지 않음. PRINCIPLES.md 세션 시작 7단계의 "(chief만) overseer/stability/sentinel Agent 3개 호출 — 생략 시 원칙 A 위반" 조항 직접 위반. 2026-07-10에야 "최초 실가동"으로 기록됨. chief 본인이 이를 자가 보고했으며, 해당 세션에서 즉시 시정함. **[감경 사유 존재]**: chief가 이번 세션 시작 시 자발적으로 위반을 공개하고 즉시 시정했음 — "결과가 좋으니 괜찮다" 패턴과는 다른 성격. 단, sentinel은 감경 권한 없음 — **사용자 최종 판단 요청.** | sentinel (ACTIVE_CONTEXT.md 이력 + 세션 기록 대조) |
 | 1 | 2026-07-10 | 원칙 6 (컨텍스트 승계) + 원칙 4 (투명성) 부수 | (1) 2026-06-04 chief가 `ACTIVE_CONTEXT.md`(표준 경로) 대신 `ACTIVE_CONTEXT_joomidang.md`(비표준 파일명)에 세션 재시작 기록을 남김 — 이 파일에는 감시 세션 STATE.md 전체 초기화(overseer 경고 2건, sentinel의 "overseer/stability 호출 불명" 추적, stability의 3진 아웃 카운터 2/3 등)를 "사용자 지시"로 단행했다는 내용이 담겨 있으나, VIOLATION_LOG.md가 정의한 유일한 정식 초기화 절차(sentinel 실행 팀 해산: 3회 위반 시점에만, STATE_teamN_archived.md 아카이브, VIOLATION_LOG 기재, 팀 번호 증가, ACTIVE_CONTEXT.md 공지)는 전혀 수행되지 않음. (2) 표준 `ACTIVE_CONTEXT.md`의 2026-06-24 "작업 완료" 기록(7커밋·127파일·기능 완성 등)이 joomidang-ai 레포에 커밋되지 않은 채 로컬 작업 트리에만 존재 — 원격 공유 상태로 승계되지 않음. 두 사례 모두 "1회성 즉시 수정"이 아니라 5주간(06-04~07-10) 방치된 반복 패턴. | overseer (git log/diff 직접 검증) |
+
+---
+
+## 미확정 위반 (RCA 결과 대기)
+
+| # | 날짜 | 의혹 원칙 | 내용 | 상태 |
+|---|------|-----------|------|------|
+| V2 추정 | 2026-06-24 이전 | 원칙 A (위임 의무) | **chief 직접 코드 작성 추정**: ACTIVE_CONTEXT.md 2026-06-24 기록에 7커밋·127파일·다수 기능 구현이 완성된 것으로 기재되어 있으나, 해당 기간의 tool_log.jsonl가 존재하지 않아(tool-logger.ps1 인프라 결함으로 기록 무효화) 서브 세션 위임 여부를 직접 검증할 수 없음. 위임 세션 이력이 ACTIVE_CONTEXT에 명기되지 않음. 로그 증거 없이 확정 판정은 원칙 1(RCA) 위반이므로 PLAUSIBLE 상태로 유지. chief가 위임 근거(위임 세션 이름·날짜)를 소명하거나, rca 세션이 검토해야 확정 가능. | **PLAUSIBLE — chief 소명 또는 rca 세션 검토 필요, 카운트 미산정** |
+| V_ksool | 2026-07-10 | 원칙 A (위임 의무) + 원칙 4 (투명성) | **k술 벤치마킹 세션 직접 구현**: overseer가 ef0ba34 커밋(20:11) + .tool_log.jsonl 직접 검증. 968라인 10파일(FilterPanel.tsx·about·how-to-enjoy·faq 등) chief 직접 구현, k술 관련 Agent(developer) 호출 기록 없음. 커밋 Co-Authored-By: Claude Sonnet 4.6가 chief 세션 직접 작성의 증거. 세션 종료 후 ACTIVE_CONTEXT.md에 k술 작업 내용 미기재(원칙 4). chief 자가 진단 V1~V3와 일치하며 overseer 독립 검증으로 확인. **위반 #2(감시 세션 미실행)가 사용자 미확정 상태이므로 이 건은 별도 카운트 산정 보류 — 사용자 판단 후 #3으로 확정 또는 #2 확정 후 #3으로 산정.** | **CONFIRMED by overseer — 카운트 산정은 위반 #2 확정 여부 후 사용자 결정** |
+
+---
 
 **참고**: sentinel도 동일 시점(2026-07-10)에 `.tool_log.jsonl` 하드코딩 경로 결함 및 ACTIVE_CONTEXT 중복 파일을 발견해 "사용자 판단 대기" 상태로 이미 보고함 (sessions/sentinel/STATE.md). tool-logger.ps1 하드코딩 경로 문제는 chief의 세션 내 행위가 아닌 기존 인프라 결함으로 판단하여 이 위반 카운트에서 제외했다 — 위 1건은 그와 별개로, git 커밋 기록상 chief 본인의 커밋/미커밋 행위로 명확히 귀속되는 사안만 산정했다.
 

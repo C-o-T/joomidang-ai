@@ -3,7 +3,7 @@
 > 이 팀원의 개인 기억. 작업 완료 시 갱신하며, 다음 호출 시 이전 맥락을 복원한다.
 
 ## 현재 상태
-대기 중 — 2026-05-11 원칙 파일 종합 감사 완료 (git 2578763)
+대기 중 — 2026-07-10 joomidang 특정 내용 제거 작업 완료 (git 5238cc6)
 
 ## 완료한 작업 이력
 | 날짜 | 작업 | 핵심 결정 |
@@ -18,6 +18,7 @@
 | 2026-05-11 | IPE 시스템 구현 검증 (13개 파일) — APPROVED | 검증 항목 5개 전체 통과. AGENT_PRINCIPLES.md I.1~I.4 존재, 전 CLAUDE.md IPE 블록+시나리오 테이블 삽입, 시나리오 역할 적합성 확인, PRINCIPLES.md IPE 요약 추가, 형식 통일. 범위 외 결함 발견: 9개 서브/감시 세션 CLAUDE.md 시작 절차 경로 미수정(project-state 미반영) — chief에 제안 보고. |
 | 2026-05-11 | 토큰 최적화 — PRINCIPLES.md 5항목 보강 + AGENT_PRINCIPLES.md 중복 감시세션 정의 3개 제거 | PRINCIPLES.md: HIGH 판정 기준, 감시세션 원칙2 예외, 세션종료기록 형식, STATE.md 표준 형식, IPE 전체 형식 추가(87→163줄). AGENT_PRINCIPLES.md: overseer/stability/sentinel 역할 정의 섹션 제거(845→733줄). git push a0b4ba8 완료. |
 | 2026-05-11 | 원칙 파일 종합 감사 (15개 파일 전체) — 수정 8건 완료 | A. AGENT_PRINCIPLES.md 읽기 지시 전면 제거 (6.2 표, 세션 시작 체크리스트, PRINCIPLES.md 5단계). B. 경로 일관성 수정: CLAUDE.md 루트 3~5번, START_HERE.md 3단계, AGENT_PRINCIPLES.md 6.3/6.4/6.5/6.6. C. overseer/CLAUDE.md 접근 범위 경로 수정. D. planner/CLAUDE.md 산출물 STATE.md 경로 수정. E. START_HERE.md 레포 역할 표에 sessions/_shared/PRINCIPLES.md 추가. git push 2578763 완료. |
+| 2026-07-10 | PRINCIPLES 레포에서 joomidang 프로젝트 특정 내용 제거 (project-agnostic화) — chief 지시 | joomidang이 별도 폴더로 분리 운영됨에 따라: (1) CLAUDE.md 루트 제목 "joomidang 워크스페이스"→"멀티 세션 AI 워크스페이스"로 변경, 본문 project-agnostic 서술은 유지. (2) START_HERE.md 디렉터리 트리 예시 및 프로젝트 목록 표에서 joomidang 행 삭제 (dataverse 예시만 존치, 안내 문구는 이미 "예시"로 표기되어 있어 수정 불필요). (3) sessions/developer/CLAUDE.md의 "코딩 규칙 (joomidang-platform)" 섹션(Spring Boot/Java, BigDecimal, com.joomidang.backend 등 stale 스택) 전체 삭제 — 프로젝트별 컨벤션은 각 프로젝트 PROJECT_CONTEXT.md 귀속 원칙 재확인. GitHub joomidang-ai 레포 자체는 미변경. git push 5238cc6 완료. .gitignore의 joomidang-platform/·joomidang-v2/ 항목은 지시 범위 밖이라 미변경 — chief 참고용으로만 보고. |
 
 ## 현재 적용 중인 판단 기준
 - 파일 간 내용 불일치는 "처음 읽는 세션이 혼란 없이 따라갈 수 있는가"를 기준으로 판단

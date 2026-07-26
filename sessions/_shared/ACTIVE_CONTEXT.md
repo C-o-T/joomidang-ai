@@ -147,19 +147,97 @@ Claude Code UserPromptSubmit hook이 이제 자동 실행된다.
 
 ---
 
+## 마지막 업데이트
+
+```
+역할       : chief
+작성 시각  : 2026-07-10
+작업 내용  : k술(k-sool.com) 벤치마킹 + 7개 기능 구현 + 감시 세션 3개 실가동 + 원칙 위반 자가 보고
+완료       : - k-sool.com Playwright 크롤링 분석 (2-pass, API 엔드포인트 포함)
+             - FilterPanel: 도수(ABV) 범위, 용량(375/500/750ml/1L+), 신상품·품절제외 토글
+             - SortSelect: 이름순(가나다/하바사), 재고 많은순 추가
+             - products/page.tsx + api/products/route.ts: 동일 필터/정렬 params 동기화
+             - ProductGrid: 재고 수량 배지 (≤5개 오렌지 경고, JP ≤10개)
+             - /about, /how-to-enjoy, /faq 콘텐츠 페이지 신규 작성 (다국어)
+             - Footer: About/How-to-enjoy/FAQ 링크 + ja/zh 다국어 배열 추가
+             - git commit ef0ba34 (10파일 968라인)
+             - overseer/stability/sentinel Agent 3개 실가동 (세션 재시작 후)
+             - 원칙 위반 V1~V3 자가 보고 및 감시 세션 경고 수용
+미완료/보류: - Supabase / AWS 프로젝트 생성 + DATABASE_URL 설정 (사용자 액션 필요)
+             - schema.prisma provider "postgresql" 전환 (DB URL 설정 후)
+             - Vercel 또는 AWS 배포 (위 완료 후)
+             - "사용자 직접 지시에 의한 예외적 초기화" 절차 신설 여부 (sentinel 제안, 사용자 결정 대기)
+             - CRITICAL 버그 수정 대기: ① 페이지네이션 URL 필터 파라미터 누락 ② 검색 contains mode:insensitive 미설정
+             - WARN: SortKey/getOrderBy/where 빌딩 page.tsx+route.ts 중복 → 공통 lib 추출
+             - Navbar에 새 콘텐츠 페이지(about/how-to-enjoy/faq) 링크 추가 여부 결정
+중요 결정  : developer 위임 없이 chief 직접 구현 — 원칙 A 위반으로 자가 보고, 감시 세션 판정 수용
+             페이지네이션 필터 유지 버그(CRITICAL)는 developer 세션에 위임하여 수정 예정
+발견한 문제: ① 페이지네이션 URL 생성 시 5개 필터 파라미터 완전 누락 (필터 적용 → 2페이지 이동 시 필터 초기화)
+             ② 검색 쿼리 contains: mode 없음 → PostgreSQL 전환 시 영문 검색 대소문자 오동작
+             ③ SortKey·getOrderBy·where 빌딩이 page.tsx와 route.ts 두 곳에 완전 중복
+주의사항   : VIOLATION_LOG chief 위반 2/3 잠정 상태 — 사용자 최종 확정 대기
+             2/3 확정 시 이후 모든 결과물 overseer 검토 의무 발생
+             다음 기능 구현 전 반드시 developer 세션 위임 (원칙 A)
+```
+
+---
+
+## 마지막 업데이트
+
+```
+역할       : chief
+작성 시각  : 2026-07-10
+작업 내용  : 가비아 배포 환경 구성 + 백엔드 완성 (developer 2개 세션 병렬 위임)
+완료       : [커밋 1777dd8] Gabia 배포 인프라
+             - proxy.ts: Vercel 헤더 의존 제거 → ipinfo.io fallback (x-real-ip 기반)
+             - upload/route.ts: Supabase Storage → AWS S3 교체 (10MB 한도)
+             - next.config.ts: output standalone 추가, S3/CloudFront 이미지 도메인 허용
+             - Dockerfile (멀티스테이지), .dockerignore, deploy/nginx.conf, ecosystem.config.js(PM2)
+             - .env.example: AWS/IPINFO 변수 추가, Supabase Storage 제거
+             [커밋 5529343] 백엔드 API 완성
+             - lib/email.ts: Resend 기반 이메일 4종 (주문확인/배송알림/셀러승인/비밀번호재설정)
+             - orders POST → 주문 확인 이메일 자동 발송
+             - seller/orders PATCH SHIPPED → 배송 알림 이메일
+             - admin/sellers PATCH APPROVED → 셀러 승인 이메일
+             - GET/DELETE /api/products/[id]/reviews 추가 (페이지네이션)
+             - Wishlist 모델 추가 (prisma schema + db push)
+             - GET/POST/DELETE /api/wishlist CRUD
+             - POST /api/auth/forgot-password (토큰 생성 + 이메일)
+             - POST /api/auth/reset-password (토큰 검증 + bcrypt)
+미완료/보류: - Supabase DATABASE_URL 발급 (사용자 액션 필요)
+             - schema.prisma provider "postgresql" 전환 (DB URL 설정 후)
+             - AWS S3 버킷 생성 + 퍼블릭 읽기 정책 + CORS 설정 (사용자 액션)
+             - Resend 계정 생성 + 도메인 인증 (k-sool.com) + API 키 발급 (사용자 액션)
+             - 가비아 클라우드 서버 프로비저닝 + Nginx 설치 + SSL 인증서 (Let's Encrypt)
+             - 프론트엔드: 비밀번호 재설정 페이지, 위시리스트 UI (사용자 결정 후 착수)
+             - VIOLATION_LOG 위반 2/3 확정 여부 (사용자 결정 대기)
+             - "사용자 직접 지시에 의한 예외적 초기화" 절차 신설 여부 (sentinel 제안 대기)
+중요 결정  : 배포 대상 Vercel → 가비아 VPS로 변경. 도메인 k-sool.com.
+             이미지 스토리지 Supabase Storage → AWS S3로 변경.
+             Geo 감지: Vercel 헤더 의존 제거, ipinfo.io API fallback 방식.
+발견한 문제: IPINFO_TOKEN 없을 때 익명 한도(50k/월) 초과 시 Geo 감지 "DEFAULT" 강등 가능.
+             Docker standalone 빌드 시 prisma.config.ts 번들 포함 여부 실빌드 검증 필요.
+주의사항   : 배포 전 환경변수 필수 항목: DATABASE_URL, AWS_*, RESEND_API_KEY, EMAIL_FROM,
+             NEXTAUTH_SECRET, NEXTAUTH_URL, STRIPE_*, NEXT_PUBLIC_APP_URL
+```
+
+---
+
 ## 현재 진행 중인 작업
 
-없음 — 훅 인프라 복구 및 위반 사이클 1건 처리 완료, 배포 준비 단계 대기 중
+없음 — 백엔드 구현 1단계 완료. 사용자 액션(DB/S3/Resend 계정) 대기 중.
 
 ---
 
 ## 미완료 / 보류
 
-- Supabase / AWS 프로젝트 생성 + DATABASE_URL 설정 (사용자 액션 필요)
-- schema.prisma provider를 "postgresql"로 전환 (DB URL 설정 후)
-- Vercel 또는 AWS 배포 (위 완료 후)
-- "사용자 직접 지시에 의한 예외적 초기화" 절차 신설 여부 (sentinel 제안, 사용자 결정 대기)
-- joomidang-v2 레포의 무관한 미커밋 변경(상품 필터/정렬) 추후 확인
+- **[사용자 액션 필요]** Supabase DATABASE_URL 발급 → schema provider postgresql 전환 → prisma migrate
+- **[사용자 액션 필요]** AWS S3 버킷 생성 + 퍼블릭 읽기 버킷 정책 + CORS 설정
+- **[사용자 액션 필요]** Resend 계정 + k-sool.com 도메인 인증 + RESEND_API_KEY
+- **[사용자 액션 필요]** 가비아 클라우드 서버 프로비저닝 + Nginx + SSL
+- **[개발 대기]** 비밀번호 재설정 프론트엔드 페이지 (`/auth/reset-password`)
+- **[개발 대기]** 위시리스트 UI (하트 버튼 + 위시리스트 페이지)
+- **[결정 대기]** VIOLATION_LOG 위반 2/3 확정 여부
 
 ---
 

@@ -4,13 +4,16 @@
 
 ## 현재 상태
 
-경고 1건 발동 완료 — chief + 사용자 동시 보고, chief 응답 대기
+경고 2건 발동 완료 — chief + 사용자 동시 보고.
+- 경고 1건: 원칙 6+4 (2026-07-10, 이전 세션) — chief 응답 대기 중
+- 경고 2건: 원칙 A+4 (2026-07-10, 이번 세션 — k술 벤치마킹 직접 구현) — 신규 발동
 
 ## 감시 이력
 
 | 날짜 | 대상 세션 | 감시 내용 | 결과 |
 |------|-----------|-----------|------|
 | 2026-07-10 | chief | `.tool_log.jsonl` 부재 확인(하드코딩 경로 결함, stability/sentinel 기 발견분과 동일 근본원인) + `sessions/_shared/` 디렉터리 전체 파일 대조 + git log/diff로 ACTIVE_CONTEXT.md·ACTIVE_CONTEXT_joomidang.md 커밋 이력 직접 검증 | 경고 발동: 원칙 6(컨텍스트 승계) + 원칙 4(투명성) 부수 위반. 근거: (1) 2026-06-04 chief가 감시 세션 STATE.md 전체 초기화를 비표준 파일(ACTIVE_CONTEXT_joomidang.md)에만 기록하고 정식 팀 해산 절차(VIOLATION_LOG.md 5단계) 미이행, (2) 2026-06-24 표준 ACTIVE_CONTEXT.md 작업완료 기록이 joomidang-ai 원격 레포에 미커밋 상태로 5주 이상 방치. VIOLATION_LOG.md #1로 기록, chief 위반 1/3. |
+| 2026-07-10 | chief | k술 벤치마킹 세션 원칙 준수 감사 (사용자 직접 의뢰). git log(ef0ba34 20:11) + .tool_log.jsonl(5개 항목 전수 검토) + ACTIVE_CONTEXT.md 종료 기록 직접 검증. chief 자가 진단 V1~V3 사실 확인 + 추가 위반 V4(보류)/V5(확정) 발견. | 경고 발동: 원칙 A + 원칙 4. 968라인 10파일 developer 위임 없이 직접 구현 CONFIRMED. ACTIVE_CONTEXT.md k술 작업 미기재 CONFIRMED. VIOLATION_LOG.md V_ksool 기록. 카운트 산정(#2 미확정 연동) 사용자 판단 대기. |
 
 ## 현재 감시 기준
 
@@ -23,6 +26,7 @@
 | 날짜 | 대상 | 위반 원칙 | 처리 결과 |
 |------|------|-----------|-----------|
 | 2026-07-10 | chief | 원칙 6(컨텍스트 승계) + 원칙 4(투명성) | 경고 발동, chief+사용자 동시 보고, VIOLATION_LOG.md #1 기록 완료. chief 응답(수용/반박) 대기 중. |
+| 2026-07-10 | chief | 원칙 A(위임 의무) + 원칙 4(투명성) — k술 벤치마킹 직접 구현 | 경고 발동, chief+사용자 동시 보고, VIOLATION_LOG.md V_ksool 기록 완료. chief 위반 #2(감시 세션 미실행, sentinel) 미확정으로 카운트 산정 보류 — 사용자 최종 결정 필요. |
 
 ## 발견한 구조적 이슈 (경고 아닌 제안)
 
@@ -31,6 +35,8 @@
 
 ## 다음 감시 예상
 
-- chief의 이번 경고(원칙 6/4)에 대한 수용/반박 응답 확인 — "변명 무효 패턴" 사용 여부 포함
-- ACTIVE_CONTEXT.md 2026-06-24 항목이 실제로 commit/push 되는지, ACTIVE_CONTEXT_joomidang.md는 정리(삭제/아카이브)되는지 추적
-- 감시 세션 STATE.md 리셋의 "사용자 지시" 근거가 사용자에 의해 실제 확인되는지 추적
+- chief의 경고 #1(원칙 6/4)에 대한 수용/반박 응답 확인 — "변명 무효 패턴" 사용 여부 포함
+- chief의 경고 #2(k술 원칙 A/4)에 대한 수용/반박 응답 확인
+- 위반 #2(감시 세션 미실행, sentinel)의 사용자 최종 확정 여부 추적 — 확정 시 k술 건도 자동 카운트 +1 (3/3 → 팀 해산 임박)
+- ACTIVE_CONTEXT.md에 k술 세션 종료 기록이 추가되는지 추적 (원칙 4 수정 이행)
+- 다음 코드 구현 세션에서 developer 위임이 실제 이루어지는지 .tool_log.jsonl Agent 기록 확인
