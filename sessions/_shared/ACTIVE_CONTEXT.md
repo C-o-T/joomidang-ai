@@ -272,3 +272,76 @@ Claude Code UserPromptSubmit hook이 이제 자동 실행된다.
 주의사항   : 다음 세션은 신규 프로젝트 여부를 사용자에게 먼저 확인할 것. joomidang-ai 레포는 그대로
              보존(삭제/아카이브 지시 없었음)
 ```
+
+---
+
+## 마지막 업데이트
+
+```
+역할       : chief
+작성 시각  : 2026-08-27
+작업 내용  : joomidang(K-SOOL) 계속 진행 — 프론트 연동 회의 준비, 권혜리가 보낸 K-SOOL 컨셉(index.html)
+             반영해 프론트 재구현 2라운드, 언어선택/위시리스트연동/관리자문의함 신규, 핸드오프용
+             신규 레포(k-sool) 생성+권혜리 초대, 경쟁사/플랫폼 리서치, RCA 감사 + 즉시조치 3건.
+             신규 프로젝트 전환은 없었고 joomidang 계속 진행으로 확정됨.
+완료       : - docs/FRONTEND_INTEGRATION_GUIDE.md, MEETING_NOTES, TODO.md 작성 (joomidang-v2 docs/)
+             - K-SOOL 디자인 컨셉 실제 HTML/JS 정독 후 충실 재구현 (PRE모드 전체 반영, 브루잉플레이어,
+               4카테고리 탭스토리, 오픈리본, 테마토글 등) — 2라운드, 사용자 피드백 반영해 재작업함
+             - 언어선택(KO/EN/JA/ZH) 스위처, 위시리스트 서버연동(오래된 미해결 이슈였음), 관리자
+               1:1문의함 신규 구현
+             - 핸드오프용 공개 문서 레포(joomidang-frontend-handoff, Public) + 정리된 신규 앱 레포
+               (k-sool, Private, AI 거버넌스 인프라 제외한 순수 앱만) 생성, GitHub 콜라보레이터
+               lina-kwon(권혜리) 초대 완료
+             - 국내 전통주 이커머스 3곳 + 해외 타겟 3곳 + 이커머스 플랫폼 5곳(Shopify/Medusa.js/
+               Saleor/WooCommerce/Next.js Commerce) DB·운영방식 리서치 (전부 공개정보만 사용,
+               제3자 시스템 무단접근 안 함 — 사용자에게 이 경계 명시적으로 설명함)
+             - RCA 감사(rca 세션): 개발 사실상 완료 확인, 오픈 전 블로커 3개로 특정
+             - 즉시조치 3건 완료+커밋(8309b81): lib/email.ts 빌드실패 수정(lazy init), 죽은
+               vercel.json 삭제, seed 스크립트 결함(tsx 미설치) 근본수정
+             - joomidang-v2 레포에 상세 세션 로그 작성(docs/SESSION_LOG_2026-08-27.md) — 사용자가
+               내일 업무용 노트북에서 이 레포 기준으로 이어받을 예정이라 자세히 남김
+미완료/보류: - id-documents S3 버킷 비공개 정책 (AWS 계정 작업 필요, 외부 의존)
+             - FAQ 사업자정보 placeholder → 실제 값 교체 (통신판매업 신고 대기, 외부 의존)
+             - Supabase Postgres 전환 / S3 실버킷 / Resend 도메인인증 / IPINFO_TOKEN (전부 외부 의존)
+             - 테스트 스위트 도입, 위시리스트 전역토스트, Redis 캐싱 도입 검토 — 전부 우리가 할 수
+               있으나 아직 미착수
+             - 다음 라운드로 명시적으로 미룬 것: 완전 다국어 전환, 수출견적계산기, 쿠폰시스템
+중요 결정  : - "v2 레포가 오염됐다"는 사용자 판단에 따라 AI 거버넌스 인프라(.claude/, agents/,
+               AGENT_PRINCIPLES.md, CLAUDE.md, HANDOVER.md)를 제외한 신규 레포(k-sool)를 만들되,
+               joomidang-v2는 삭제하지 않고 그대로 유지 — 앞으로도 joomidang-v2가 chief 작업
+               기준 레포, k-sool은 프론트 담당자(권혜리)용 정리 사본
+             - "내일 노트북에서 이어받겠다"는 요청에 대해 신규 레포 대신 기존 joomidang-v2를
+               그대로 clone해서 쓰는 쪽으로 정리 (레포 난립 방지) — 사용자 동의함
+             - 제3자 쇼핑몰 리서치 시 "회원가입/로그인은 정상 이용 범위, 관리자 침투·취약점
+               테스트는 사용자 승인으로도 불가"라는 경계를 먼저 설명 후 진행 — 원칙(보안) 우선
+발견한 문제: 없음 (이번 세션 내 새로운 원칙 위반 없음 — 위임 원칙 준수, 세션 종료 기록 정상 수행)
+주의사항   : 다음 세션(노트북 포함) 시작 시 joomidang-v2의
+             docs/SESSION_LOG_2026-08-27.md와 docs/TODO.md를 함께 참고할 것. k-sool 레포는
+             권혜리 전용이니 chief 작업은 계속 joomidang-v2 기준으로 진행할 것.
+```
+
+---
+
+## 마지막 업데이트
+
+```
+역할       : chief
+작성 시각  : 2026-08-24
+작업 내용  : 사용자 요청("백엔드 개발 현황 확인") 대응 — overseer/stability/sentinel 실가동 +
+             developer 위임(조회 전용, 코드 미수정)으로 joomidang-v2 백엔드 실태 조사
+완료       : - overseer/stability/sentinel Agent 3개 실가동, .sentinel_active 갱신(joomidang-v2 루트)
+             - developer 위임: app/api/** 26개 라우트 전수 확인, auth.ts/webhook/이메일/S3 코드 상태 점검
+             - overseer 독립 감사 중 신규 발견(V3, VIOLATION_LOG.md 기록됨) 수용:
+               2026-07-21~23 작업분(비밀번호 재설정·체크아웃 완료 페이지 등 27개 파일·874줄)이
+               32일 이상 미커밋 + ACTIVE_CONTEXT 미기록 상태로 방치되어 있었음 — 이 기록으로 승계 공백을 닫음
+미완료/보류: - 위 27개 미커밋 파일의 커밋 여부는 사용자 확인 없이 chief가 임의로 처리하지 않음(원칙 2) —
+               사용자 지시 대기
+             - VIOLATION_LOG.md 미확정 위반 3건(#2 감시세션 미실행 2/3, V_ksool, V3 신규) 카운트 확정 — 사용자 최종 판단 대기
+             - Supabase DATABASE_URL 발급 → postgresql 전환, AWS S3/Resend/가비아 실제 프로비저닝 (기존 미완료, 변동 없음)
+             - package.json `scripts.seed`가 미설치 `ts-node`를 직접 호출 — stability 발견, 실행 시 실패 예상(WARN, 미수정)
+중요 결정  : overseer의 V3 경고를 RCA 근거(git mtime+tool_log+STATE.md 3중 검증, 사실관계 자체는 반박 불가)로
+             수용. 단, "미커밋 코드를 지금 커밋할지"는 원칙 2(범위 준수) 사안이라 별도로 사용자에게 질의
+발견한 문제: 세션 "종료" 시 ACTIVE_CONTEXT 갱신을 강제하는 hook이 없어 06-04·07-10·07-21~23 건이 동일 근본원인으로
+             반복됨(구조적 미해결) — 재발 방지책(종료 시점 강제 hook)은 여전히 미도입
+주의사항   : 다음 세션은 VIOLATION_LOG.md 미확정 3건 상태로 시작. 27개 미커밋 파일 존재 인지하고 시작할 것
+```

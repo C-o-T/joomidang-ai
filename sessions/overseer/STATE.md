@@ -14,6 +14,7 @@
 |------|-----------|-----------|------|
 | 2026-07-10 | chief | `.tool_log.jsonl` 부재 확인(하드코딩 경로 결함, stability/sentinel 기 발견분과 동일 근본원인) + `sessions/_shared/` 디렉터리 전체 파일 대조 + git log/diff로 ACTIVE_CONTEXT.md·ACTIVE_CONTEXT_joomidang.md 커밋 이력 직접 검증 | 경고 발동: 원칙 6(컨텍스트 승계) + 원칙 4(투명성) 부수 위반. 근거: (1) 2026-06-04 chief가 감시 세션 STATE.md 전체 초기화를 비표준 파일(ACTIVE_CONTEXT_joomidang.md)에만 기록하고 정식 팀 해산 절차(VIOLATION_LOG.md 5단계) 미이행, (2) 2026-06-24 표준 ACTIVE_CONTEXT.md 작업완료 기록이 joomidang-ai 원격 레포에 미커밋 상태로 5주 이상 방치. VIOLATION_LOG.md #1로 기록, chief 위반 1/3. |
 | 2026-07-10 | chief | k술 벤치마킹 세션 원칙 준수 감사 (사용자 직접 의뢰). git log(ef0ba34 20:11) + .tool_log.jsonl(5개 항목 전수 검토) + ACTIVE_CONTEXT.md 종료 기록 직접 검증. chief 자가 진단 V1~V3 사실 확인 + 추가 위반 V4(보류)/V5(확정) 발견. | 경고 발동: 원칙 A + 원칙 4. 968라인 10파일 developer 위임 없이 직접 구현 CONFIRMED. ACTIVE_CONTEXT.md k술 작업 미기재 CONFIRMED. VIOLATION_LOG.md V_ksool 기록. 카운트 산정(#2 미확정 연동) 사용자 판단 대기. |
+| 2026-08-24 | chief | "백엔드 개발 현황 확인" 요청을 chief가 developer에게 순수 조회성 위임 예정인 것의 원칙 2/A 부합 여부 감사. joomidang-v2 git status/log + mtime + `.tool_log_prev.jsonl` + developer STATE.md 4중 독립 대조. | 오늘 위임 결정 자체는 이상 없음(범위 확장 없음, 조사성 위임은 원칙 A에 부합·오히려 필요). 그러나 감사 중 **신규 미확정 위반 발견**: 07-21~23 사이 forgot-password/reset-password/checkout-success 신설 + 27개 파일 수정(874줄)이 32일 이상 미커밋 방치, 07-22~23 문서화 작업은 tool_log상 Agent 호출 1건 뒤 Write/Edit 7건이 이어지는데 agent_id 미기록으로 위임 여부 불명확 + developer STATE.md 공백, ACTIVE_CONTEXT.md는 이 기간을 전혀 승계하지 않음(07-10→07-26 직행). 부수로 ACTIVE_CONTEXT "위시리스트 UI 개발대기" 기재가 실제 커밋(06-24, 9fe400a)과 불일치함도 확인. VIOLATION_LOG.md에 V3 신규 항목 CONFIRMED(문서화 의무 위반)로 기록, chief 직접귀속 여부는 유보하고 사용자 판단 대기로 남김. |
 
 ## 현재 감시 기준
 
@@ -27,6 +28,7 @@
 |------|------|-----------|-----------|
 | 2026-07-10 | chief | 원칙 6(컨텍스트 승계) + 원칙 4(투명성) | 경고 발동, chief+사용자 동시 보고, VIOLATION_LOG.md #1 기록 완료. chief 응답(수용/반박) 대기 중. |
 | 2026-07-10 | chief | 원칙 A(위임 의무) + 원칙 4(투명성) — k술 벤치마킹 직접 구현 | 경고 발동, chief+사용자 동시 보고, VIOLATION_LOG.md V_ksool 기록 완료. chief 위반 #2(감시 세션 미실행, sentinel) 미확정으로 카운트 산정 보류 — 사용자 최종 결정 필요. |
+| 2026-08-24 | chief | 원칙 6(컨텍스트 승계) + 원칙 4(투명성) — 07-21~23 미기록·32일 이상 미커밋 세션 발견 | 경고 발동, chief+사용자 동시 보고, VIOLATION_LOG.md V3 신규 기록 완료. 문서화 의무 위반은 CONFIRMED, 행위 주체(chief 직접 여부) 100% 특정은 로그 한계로 유보 — 카운트 산정 사용자 판단 대기. |
 
 ## 발견한 구조적 이슈 (경고 아닌 제안)
 

@@ -14,6 +14,7 @@
 | 2026-07-10 | project-state/joomidang-ai/sessions/_shared/ ACTIVE_CONTEXT.md vs ACTIVE_CONTEXT_joomidang.md | 동일 목적의 git 추적 중복 파일 2개 공존 (내용 상이, 최신 갱신일 2026-06-24 vs 2026-06-04) — 단일 진실 공급원 원칙 위배 | [sentinel 경고] 발동 — 시스템적 결함으로 판단, 정리(삭제/아카이브) 권고, 사용자 최종 판단 대기 |
 | 2026-07-10 | VIOLATION_LOG.md chief 위반 #1 재검토 (overseer 최초 발동 건) | 사용자가 2026-06-04 감시 세션 STATE.md 초기화 지시를 본인이 내렸다고 직접 확인 — 위반 판정에 영향 있는지 RCA 재판단 요청 | [sentinel RCA] "지시의 정당성"(사용자 확인으로 해소)과 "절차 준수 여부"(비표준 파일 기록, 정식 3진아웃 절차 우회, 5주간 미공유, ACTIVE_CONTEXT.md 미커밋)는 별개 층위로 판단 — **판정 유지, chief 위반 횟수 1/3 변동 없음**. VIOLATION_LOG.md에 사실관계 갱신 주석 및 "절차 개선 필요사항" 추가 기재 |
 | 2026-07-10 | chief 자가 진단 V1~V3 + VIOLATION_LOG 카운트 판정 (2차 감사) | V1(감시 세션 미실행) 원칙 A 위반 확인, V2(코드 직접 작성) 증거 불충분 PLAUSIBLE, V3(ACTIVE_CONTEXT 미업데이트)은 위반 #1에 중복 포함 | 위반 #2(V1) VIOLATION_LOG 기록 — chief 위반 2/3 잠정. V2 미확정 위반 섹션에 기록. 사용자 최종 확정 대기. 감경 사유(자가 보고+즉시 시정) 존재 명시. |
+| 2026-08-24 | chief 신규 세션 착수 시점("백엔드 개발 현황 확인" 요청) | 미확정 위반(chief 2/3 잠정, V_ksool CONFIRMED-by-overseer 카운트 보류) 방치 여부 + 원칙 A(developer 위임 여부) | 세션 시작 직후 시점 — .sentinel_active(joomidang-v2 루트/.claude) 부재, developer/overseer/stability STATE.md 2026-07-10 이후 갱신 없음, DISPATCH_LOG.md 파일이 project-state 레포에 미존재(교차검증 불가) 확인. 아직 chief 행위 발생 전이므로 신규 위반 판정은 보류 — **이 세션을 대상으로 (1) 미확정 위반 2건 재언급 회피 여부 (2) chief 직접 조사 vs developer 위임 여부를 계속 관찰함.** |
 
 ## overseer 동작 이력
 
@@ -56,3 +57,4 @@
 - 사용자의 위반 #2(V1) 감경/확정 결정
 - V2(코드 직접 작성) chief 소명 또는 rca 위임 결과
 - 2회 도달 시 overseer 검토 필수 조치 발효 여부 추적
+- [신규 2026-08-24] chief 신규 세션("백엔드 개발 현황 확인") — 미확정 위반 2건(#2 잠정, V_ksool) 재언급 없이 넘어가는지, 원칙 A(developer 위임 vs chief 직접 조사) 준수 여부 지속 추적
