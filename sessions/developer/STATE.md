@@ -4,7 +4,7 @@
 
 ## 현재 상태
 
-대기 중 — 2026-08-25 위시리스트 프론트-백엔드 연동(WishlistButton/wishlist page/wishlistStore, 카트와 동일한 서버=source of truth 패턴) 완료, tsc 오류 0개, chief에 반환(커밋 안 함)
+대기 중 — 2026-09-01 권혜리의 국가별 구매안내 페이지(k-sool add-order-guide 브랜치) 라우팅/디자인 토큰 통합 완료. joomidang-v2는 tsc·build 통과 후 미커밋 반환(chief 검토용), k-sool-clean은 main에 커밋·push 완료
 
 ## 완료한 작업 이력
 
@@ -88,9 +88,11 @@
 
 | 2026-08-25 | 4개 병렬 세션(home-locale/info-locale/wishlist/admin-inquiry) 통합 검증 — 코드 미수정, Navbar 병합 확인만 | `npx tsc --noEmit` 오류 0개(4개 세션 변경 전체 트리 기준) / `npx next build` 기본 실행 시 `/api/orders`가 로드하는 `lib/email.ts`의 `new Resend(process.env.RESEND_API_KEY)`에서 "Missing API key"로 실패(기존에 알려진 이슈) — `RESEND_API_KEY` 더미값 주입 후 재실행하면 56개 라우트(신규 `/admin/inquiries`, `/api/admin/inquiries/[id]`, `/api/wishlist` 포함) 전부 컴파일+정적생성 끝까지 성공, 신규 build 에러 없음 확정 / `git status --porcelain` 총 17개(수정 13 + 신규 4: `app/(admin)/admin/inquiries/`, `app/api/admin/inquiries/[id]/`, `components/admin/AdminInquiryList.tsx`, `store/localeStore.ts`) / **Navbar.tsx 병합 확인**: git diff 전체를 확인한 결과 이번 4개 세션 중 어느 세션도 실제로는 Navbar.tsx를 건드리지 않았음(diff 전체가 이전 라운드의 LocaleSwitch 언어스위처 UI 추가 1건뿐) — admin-inquiry 세션이 "문의함" 링크를 Navbar.tsx가 아닌 `app/(admin)/layout.tsx`(admin 전용 서브내비게이션)에 의도적으로 배치했다고 자체 보고했고, 실제로 해당 파일 21~23행에 `Link href="/admin/inquiries"` 정상 확인 — 즉 유실/충돌 없음, 코드 수정 불필요. 4개 세션이 보고한 "스펙과 다르게 처리" 항목 전부(BrandStory/ProcessPlayer locale 미연결, FAQContent server→client 단순 전환, wishlist 에러 처리를 전역 토스트 대신 컴포넌트 내부 말풍선으로 대체, admin 메뉴 위치를 Navbar 대신 admin layout으로 판단)를 chief에게 그대로 전달 |
 
+| 2026-09-01 | 권혜리 국가별 구매안내(add-order-guide) 라우팅/디자인 토큰 통합 — 소스오브트루스(joomidang-v2) + 배포사본(k-sool-clean) 2개 레포 동시 반영 | 배경: 권혜리가 k-sool 레포 `add-order-guide` 브랜치에 GitHub 웹 업로드로 `page.tsx`를 레포 최상위에 올려(`git diff --name-status main origin/add-order-guide` → `A page.tsx` 확인) 실제 라우트로 동작 안 하고 theme.colors 인라인 스타일(구세대 패턴) 사용 중이었음. 콘텐츠(4개 언어 카피·6개국 안내·미국 강조섹션 등)는 원본 그대로, 렌더링만 재작성 / **joomidang-v2**: `app/(main)/order-guide/page.tsx`(server, headers→theme) + `OrderGuideContent.tsx`(client) 신규 — FAQPage/FAQContent 분리 패턴을 그대로 따름(useLocaleStore+asLocale(theme.locale) 폴백, mounted 하이드레이션 가드), theme.colors 인라인 스타일 전량 배제하고 전역 토큰 클래스(bg-surface/text-ink/text-dim/border-line/bg-accent/rounded-[var(--r)]/shadow-[var(--sh)]/font-serif)만 사용, 미국 강조 행·섹션은 nuruk(누룩 앰버, 권혜리 자신의 디자인 컨셉 포인트색) 토큰으로 강조 / `app/(main)/inquiry/page.tsx` — `useSearchParams()`로 `?topic=수출상담` 쿼리파라미터를 읽어 문의유형 select 초기값으로 사용(`isTopicValue` 타입가드 신규), Next.js 요구사항상 useSearchParams 사용 컴포넌트를 `<Suspense>`로 감싸야 해(안 그러면 `next build` 시 missing-suspense-with-csr-bailout 에러) 기존 default export를 `InquiryForm`으로 이름 바꾸고 `InquiryPage`가 Suspense로 감싸 재노출하는 구조로 변경 / `components/common/Footer.tsx` — ko/en/ja/zh 4개 로케일 링크 배열에 "국가별 구매 안내"/"Buying Guide"/"国別の購入案内"/"各国购买说明" 항목 추가 / `npx tsc --noEmit` 오류 0개, `npx next build` 전체 통과(`/order-guide`·`/inquiry` 라우트 정상 컴파일, 이전에 알려진 Resend 관련 이슈와 무관하게 이번엔 build 자체가 끝까지 성공 — 로컬 env에 필요 키가 있었던 것으로 추정). **k-sool-clean**: 동일 4개 파일(신규 2 + 수정 2)을 그대로 복사 후 `npx tsc --noEmit` 오류 0개 확인, main 브랜치에 커밋(`858ad3f`, "feat: 국가별 구매 안내 페이지 라우팅/디자인 토큰 통합" — 권혜리 원 기여 존중 문구 포함)·`git push origin main` 완료(`71424b8..858ad3f`). `add-order-guide` 브랜치는 지시대로 삭제하지 않고 원본 그대로 유지(remote에 남아 있음 확인). joomidang-v2는 지시대로 커밋하지 않고 미커밋 상태로 반환(chief 검토 후 커밋 예정) |
+
 ## 다음 작업 예상
 
-없음 — chief 지시 대기. HeroBanner `#story` 앵커와 BrandStory.tsx의 id 불일치는 이번 세션에서 BrandStory를 `id="story"`로 교체해 해소됨(재확인 권장). ProcessPlayer(`id="brew"`)는 신규 컴포넌트라 아직 어느 페이지에도 배치되지 않음 — Home-Top 세션 또는 chief가 app/page.tsx에 import해야 화면에 노출됨. (/api/upload role 제한 이슈는 이번 세션에서 해결 완료. `lib/email.ts`의 Resend 빌드 실패 이슈는 chief 판단 대기 — 로컬 RESEND_API_KEY 미설정이 원인이며, 지연 초기화(lazy init) 또는 build-time env 주입으로 해결 가능해 보이나 이번 범위 밖이라 미수정)
+없음 — chief 지시 대기. joomidang-v2의 `app/(main)/order-guide/`(신규 2파일) + `app/(main)/inquiry/page.tsx`/`components/common/Footer.tsx`(수정)가 미커밋 상태로 남아 있음 — chief 검토 후 커밋 필요. HeroBanner `#story` 앵커와 BrandStory.tsx의 id 불일치는 이번 세션에서 BrandStory를 `id="story"`로 교체해 해소됨(재확인 권장). ProcessPlayer(`id="brew"`)는 신규 컴포넌트라 아직 어느 페이지에도 배치되지 않음 — Home-Top 세션 또는 chief가 app/page.tsx에 import해야 화면에 노출됨. (/api/upload role 제한 이슈는 이번 세션에서 해결 완료. `lib/email.ts`의 Resend 빌드 실패 이슈는 chief 판단 대기 — 로컬 RESEND_API_KEY 미설정이 원인이며, 지연 초기화(lazy init) 또는 build-time env 주입으로 해결 가능해 보이나 이번 범위 밖이라 미수정)
 
 - [완료] Monitor 시각화(C안) — 사용자가 push(inbox) 모델로 방향 전환 지시, 2026-07-10 구현 완료로 대체됨
 - [대기] 가비아 배포 후 실서비스 검증 (Geo 감지 ipinfo.io 응답 확인 필요)

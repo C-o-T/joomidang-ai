@@ -345,3 +345,42 @@ Claude Code UserPromptSubmit hook이 이제 자동 실행된다.
              반복됨(구조적 미해결) — 재발 방지책(종료 시점 강제 hook)은 여전히 미도입
 주의사항   : 다음 세션은 VIOLATION_LOG.md 미확정 3건 상태로 시작. 27개 미커밋 파일 존재 인지하고 시작할 것
 ```
+
+---
+
+## 마지막 업데이트
+
+```
+역할       : chief
+작성 시각  : 2026-09-03
+작업 내용  : PRINCIPLES 신 아키텍처 동기화 + joomidang → jihyea 프로젝트 전환 + 위반 미확정 3건 사용자 종결
+완료       : - PRINCIPLES 로컬을 origin/main(055e41e)으로 리셋 — 원격이 force-push로 아키텍처를
+               전면 재설계(Agent 서브호출 → 실제 VS Code 세션 다중 + 파일기반 comms/ 통신 + /loop).
+               폐기된 로컬 4커밋은 backup/local-pre-reset-20260903 브랜치로 보존
+             - sessions/_shared/ACTIVE_PROJECT.md = "jihyea" 로 확정 (신 아키텍처 PROJECT 변수)
+             - project-state/jihyea-ai 신규 스캐폴딩 + 로컬 초기 커밋(5cb6135)
+             - joomidang-ai 에도 신 아키텍처 comms/ 트리 생성
+               (tasks/{7역할}/{pending,done,archive}, warnings/, logs/)
+             - developer/STATE.md 2026-09-01 기록(권혜리 order-guide 통합) 커밋 — 미푸시 방치분 해소
+             - joomidang-v2 실태 확인: order-guide 4개 파일은 이미 7f1c8a0(09-01)로 커밋·푸시 완료됨.
+               developer STATE의 "미커밋 상태로 반환" 메모는 그 후 해소된 것으로 확인.
+               현재 작업트리는 자동생성 next-env.d.ts 1건만 변경 — 실질 미커밋 코드 없음
+미완료/보류: - **VIOLATION_LOG.md 반영 미집행**: 사용자가 2026-09-03 미확정 3건(#2 감시세션 미실행 2/3,
+               V_ksool, V3)을 **전건 감경 후 종결**로 최종 판단했으나, chief는 이 파일을 직접 수정하지
+               않는다(이해상충 방지 — chief/STATE.md 판단기준). sentinel 세션이 집행해야 함
+             - joomidang 잔여 오픈 전 블로커는 그대로 보존: FAQ 사업자정보 placeholder(법적 필수),
+               id-documents/ S3 비공개 정책, Supabase Postgres 전환, Resend 도메인 인증,
+               IPINFO_TOKEN, 테스트 스위트 전무
+중요 결정  : - 프로젝트를 jihyea로 전환. joomidang-ai / joomidang-v2 / k-sool 레포는 삭제·아카이브
+               하지 않고 그대로 보존 (전환 지시만 있었고 종료 지시는 없었음 — 원칙 2)
+             - 위반 3건 전건 감경 후 종결 (사용자 최종 판단). 다만 재발 방지 과제는 종결되지 않고
+               jihyea-ai/VIOLATION_LOG.md 에 승계 기재: "세션 종료 시 ACTIVE_CONTEXT 갱신을 강제하는
+               hook 부재"가 06-04·07-10·07-21~23 반복의 동일 근본원인
+발견한 문제: PRINCIPLES 레포 정합성 결함 3건 (미수정 — 상세는 jihyea-ai/ACTIVE_CONTEXT.md 참조)
+             ① 루트 CLAUDE.md ↔ sessions/chief/CLAUDE.md 감시세션 실행주체 정면 충돌
+             ② README.md 세션 시작 프롬프트의 레포 URL이 실존하지 않는 주소
+             ③ ACTIVE_PROJECT.md 가 원격에 플레이스홀더로 커밋됨
+주의사항   : 이후 joomidang 작업 재개 시 joomidang-v2의 docs/TODO.md 와
+             docs/SESSION_LOG_2026-08-27.md 를 함께 읽을 것. k-sool 레포는 권혜리(lina-kwon) 전용
+             사본이며 chief 작업 기준 레포는 계속 joomidang-v2 다
+```
